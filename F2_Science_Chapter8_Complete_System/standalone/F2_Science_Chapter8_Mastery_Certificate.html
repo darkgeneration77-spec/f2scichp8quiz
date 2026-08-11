@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Form 2 Science Chapter 8 — Mastery Certificate</title>
+<style>
+:root{
+  --bg:#07111d;--panel:#0c1c2d;--line:#31516d;--txt:#f6f8fb;--mut:#a9bfd3;
+  --a:#69d4ff;--g:#70df9b;--y:#ffd166;--r:#ff7777
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100vh;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--txt);
+  background:radial-gradient(circle at 15% 0,#173d5f 0,transparent 34%),linear-gradient(#050a11,var(--bg))
+}
+.wrap{max-width:1050px;margin:auto;padding:20px}
+.top{
+  position:sticky;top:8px;z-index:5;background:#09192be8;backdrop-filter:blur(10px);
+  border:1px solid #294963;border-radius:18px;padding:14px 16px;display:flex;justify-content:space-between;gap:12px;align-items:center
+}
+.small{font-size:.84rem;color:var(--mut)}
+.hero{text-align:center;padding:42px 0 24px}
+.kicker{color:var(--a);font-size:.82rem;font-weight:900;letter-spacing:1px}
+.hero h1{font-size:clamp(2.4rem,6vw,4.5rem);line-height:1;margin:8px 0 14px}
+.hero h1 span{color:var(--y)}
+.hero p{max-width:720px;margin:auto;color:var(--mut);line-height:1.65}
+.certificate{
+  position:relative;margin:20px auto;background:linear-gradient(145deg,#fffdf4,#f4ead0);
+  color:#172230;border:12px solid #e5bd53;border-radius:24px;padding:42px 38px;
+  box-shadow:0 30px 90px #0008;overflow:hidden
+}
+.certificate:before,.certificate:after{
+  content:"";position:absolute;width:160px;height:160px;border:22px solid #e5bd53;border-radius:50%;opacity:.18
+}
+.certificate:before{left:-80px;top:-80px}.certificate:after{right:-80px;bottom:-80px}
+.cert-head{text-align:center}
+.cert-head .school{font-size:.82rem;letter-spacing:2px;font-weight:900;color:#4b5e70}
+.cert-head h2{font-size:2.2rem;margin:8px 0;color:#21344a}
+.cert-head .sub{color:#607080}
+.name{
+  margin:28px auto 10px;max-width:650px;border-bottom:2px solid #a98b44;
+  font-family:Georgia,serif;font-size:2.2rem;text-align:center;padding:10px;color:#17314d
+}
+.statement{text-align:center;line-height:1.7;max-width:720px;margin:15px auto;color:#46586a}
+.badge{
+  width:145px;height:145px;border-radius:50%;margin:22px auto 14px;
+  display:grid;place-items:center;text-align:center;background:#17314d;color:#ffd166;
+  border:8px double #e6bd52;font-weight:900
+}
+.badge strong{font-size:1.9rem;display:block}
+.scoregrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:22px 0}
+.sc{border:1px solid #cfbe93;background:#fffaf0;border-radius:12px;padding:10px;text-align:center}
+.sc b{display:block;font-size:1.15rem;color:#193553}.sc span{font-size:.72rem;color:#6a7681}
+.sigrow{display:flex;justify-content:space-between;gap:20px;margin-top:34px}
+.sig{width:42%;border-top:1px solid #8d7d5b;padding-top:7px;text-align:center;color:#66727c;font-size:.8rem}
+.locked{
+  border:1px solid #63434b;background:#24151b;border-radius:20px;padding:24px;text-align:center;margin:20px 0
+}
+.locked h2{color:#ffaaa6}.locked p{color:#c6b2b6;line-height:1.6}
+.requirements{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.req{border:1px solid #304e67;background:#0b1b2d;border-radius:14px;padding:13px}
+.req b{display:block;margin-bottom:4px}
+.good{color:var(--g)}.bad{color:var(--r)}
+.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px 0}
+.btn{border:0;text-decoration:none;border-radius:12px;padding:11px 14px;font-weight:850;cursor:pointer;background:linear-gradient(135deg,var(--a),#a3eaff);color:#04111b}
+.btn.gold{background:linear-gradient(135deg,#ffd166,#ffb84a)}.btn.dark{background:#142a43;color:white;border:1px solid #355875}
+.footer{text-align:center;color:#728ba3;padding:28px 0;font-size:.8rem}
+.hide{display:none!important}
+@media(max-width:760px){.scoregrid{grid-template-columns:1fr 1fr}.requirements{grid-template-columns:1fr}.certificate{padding:30px 18px}.sigrow{flex-direction:column}.sig{width:100%}.top{flex-direction:column;align-items:flex-start}}
+@media print{
+  body{background:white}.top,.hero,.actions,.locked,.footer{display:none!important}
+  .wrap{max-width:none;padding:0}.certificate{box-shadow:none;margin:0;border-width:10px;min-height:95vh}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><b>FORM 2 SCIENCE · CHAPTER 8</b><div class="small">Mastery Certificate</div></div>
+    <div class="small" id="studentTop">Achievement check</div>
+  </div>
+
+  <section class="hero">
+    <div class="kicker">FINAL ACHIEVEMENT</div>
+    <h1>CHAPTER 8<br><span>MASTERY CERTIFICATE</span></h1>
+    <p>The certificate unlocks only when all 12 individual missions meet the 80% mastery target and the Chapter 8 Final Boss reaches at least 85%.</p>
+  </section>
+
+  <section id="locked" class="locked">
+    <h2>Certificate Locked</h2>
+    <p>The mastery conditions are not fully met yet. The page checks the scores stored by the Chapter 8 games on this browser.</p>
+    <div class="requirements">
+      <div class="req"><b>Individual Missions</b><span id="missionReq"></span></div>
+      <div class="req"><b>Final Boss</b><span id="bossReq"></span></div>
+      <div class="req"><b>Overall Status</b><span id="statusReq"></span></div>
+    </div>
+    <div class="actions">
+      <a class="btn" href="F2_Science_Chapter8_Mastery_Hub.html">Back to Mastery Hub</a>
+      <a class="btn dark" href="F2_Science_Chapter8_Diagnostic_Report_Revision_Route.html">Open Diagnostic Report</a>
+    </div>
+  </section>
+
+  <section id="cert" class="certificate hide">
+    <div class="cert-head">
+      <div class="school">FORM 2 SCIENCE · CHAPTER 8</div>
+      <h2>Certificate of Mastery</h2>
+      <div class="sub">Force and Motion</div>
+    </div>
+
+    <div class="name" id="studentName">Student</div>
+    <div class="statement">
+      This certifies that the student has successfully completed the Chapter 8 mastery missions and demonstrated strong understanding of <b>Force and Motion</b>, including all assessed learning areas in 8.1 and 8.2.
+    </div>
+
+    <div class="badge">
+      <div><strong id="bossScore">85%</strong>FINAL<br>MASTERY</div>
+    </div>
+
+    <div class="scoregrid" id="scoreGrid"></div>
+
+    <div class="statement">
+      Mastery criteria achieved: all individual missions at <b>80% or above</b> and Final Boss at <b>85% or above</b>.
+    </div>
+
+    <div class="sigrow">
+      <div class="sig">Student</div>
+      <div class="sig">Teacher / Parent</div>
+    </div>
+  </section>
+
+  <div class="actions" id="certActions">
+    <button class="btn gold" onclick="window.print()">Print Certificate</button>
+    <a class="btn dark" href="F2_Science_Chapter8_Mastery_Hub.html">Mastery Hub</a>
+  </div>
+
+  <div class="footer">Form 2 Science · Chapter 8 · Force and Motion</div>
+</div>
+
+<script>
+const missions=[
+ ["8.1A","f2sci_81a_last"],["8.1B","f2sci_81b_last"],["8.1C","f2_81c_last"],["8.1D","f2_81d_last"],
+ ["8.2A","f2_82a_last"],["8.2B","f2_82b_last"],["8.2C","f2_82c_last"],["8.2D","f2_82d_last"],
+ ["8.2E","f2_82e_last"],["8.2F","f2_82f_last"],["8.2G","f2_82g_last"],["8.2H","f2_82h_last"]
+];
+
+function scoreOf(key){
+  try{
+    const d=JSON.parse(localStorage.getItem(key)||"null");
+    if(!d)return null;
+    if(typeof d.p==="number")return Math.round(d.p);
+    if(typeof d.pct==="number")return Math.round(d.pct);
+    return null;
+  }catch(e){return null}
+}
+
+function studentName(){
+  return localStorage.getItem("f2sci_81a_name")||
+         localStorage.getItem("f2_81b_name")||
+         localStorage.getItem("f2_81c_name")||
+         localStorage.getItem("f2_81d_name")||
+         localStorage.getItem("f2_82a_name")||
+         localStorage.getItem("f2_ch8_boss_name")||
+         "Student";
+}
+
+function render(){
+  const scores=missions.map(([code,key])=>({code,score:scoreOf(key)}));
+  const mastered=scores.filter(x=>x.score!==null&&x.score>=80).length;
+  const boss=scoreOf("f2_ch8_boss_last");
+  const unlocked=mastered===12 && boss!==null && boss>=85;
+  const name=studentName();
+
+  document.getElementById("studentTop").textContent="Student: "+name;
+  document.getElementById("missionReq").innerHTML=
+    mastered===12 ? `<span class="good">12 / 12 Mastered</span>` :
+    `<span class="bad">${mastered} / 12 Mastered</span>`;
+  document.getElementById("bossReq").innerHTML=
+    boss===null ? `<span class="bad">Not attempted</span>` :
+    boss>=85 ? `<span class="good">${boss}% · Passed</span>` :
+    `<span class="bad">${boss}% · Need 85%</span>`;
+  document.getElementById("statusReq").innerHTML=
+    unlocked ? `<span class="good">Certificate Unlocked</span>` :
+    `<span class="bad">Requirements Incomplete</span>`;
+
+  if(unlocked){
+    document.getElementById("locked").classList.add("hide");
+    document.getElementById("cert").classList.remove("hide");
+    document.getElementById("certActions").classList.remove("hide");
+    document.getElementById("studentName").textContent=name;
+    document.getElementById("bossScore").textContent=boss+"%";
+    document.getElementById("scoreGrid").innerHTML=scores.map(x=>
+      `<div class="sc"><b>${x.score}%</b><span>${x.code}</span></div>`
+    ).join("");
+  }else{
+    document.getElementById("locked").classList.remove("hide");
+    document.getElementById("cert").classList.add("hide");
+    document.getElementById("certActions").classList.add("hide");
+  }
+}
+render();
+</script>
+</body>
+</html>

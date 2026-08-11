@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 8 Teacher Analytics Dashboard</title>
+<style>
+:root{--bg:#07111d;--p:#0b1b2d;--line:#2c4d68;--txt:#f5f8fb;--mut:#a9bfd3;--a:#68d4ff;--g:#6bdd97;--y:#ffd166;--r:#ff7777}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(#050a11,var(--bg));color:var(--txt);font-family:Inter,Segoe UI,Arial,sans-serif}
+.wrap{max-width:1200px;margin:auto;padding:20px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:18px;background:#09192b}.small{font-size:.84rem;color:var(--mut)}
+.hero{padding:32px 0 18px}.hero h1{font-size:clamp(2rem,5vw,4rem);margin:0 0 8px}.hero h1 span{color:var(--a)}
+.config{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;margin:14px 0}
+input,select{background:#0b1b2d;color:white;border:1px solid #35556f;border-radius:11px;padding:11px}
+button{border:0;border-radius:11px;padding:11px 14px;font-weight:850;cursor:pointer;background:linear-gradient(135deg,var(--a),#a6ecff);color:#05111a}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{background:#122740;color:#fff;border:1px solid #35556f}.tab.active{background:#1b4668}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.card{border:1px solid var(--line);border-radius:16px;background:#0b1b2d;padding:15px}.big{font-size:2rem;font-weight:900}
+.panel{margin-top:16px;border:1px solid var(--line);border-radius:18px;background:#081726;padding:16px;overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:10px;border-bottom:1px solid #233f58;text-align:left}th{color:#bfefff;font-size:.83rem}.good{color:var(--g);font-weight:800}.mid{color:var(--y);font-weight:800}.bad{color:var(--r);font-weight:800}
+.bar{height:8px;background:#06101b;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--g))}
+.route{border:1px solid #304d66;border-radius:14px;padding:12px;margin:8px 0;background:#0b1b2d}.route b{display:block}.route p{margin:5px 0 0;color:var(--mut);line-height:1.5}
+.hide{display:none!important}
+@media(max-width:800px){.cards{grid-template-columns:1fr 1fr}.config{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><b>FORM 2 SCIENCE · CHAPTER 8</b><div class="small">Teacher Analytics Dashboard</div></div>
+    <div class="small">Cloudflare D1 powered</div>
+  </div>
+
+  <section class="hero">
+    <h1>STUDENT <span>PERFORMANCE</span></h1>
+    <div class="small">Enter your Worker API URL and teacher key once on this device.</div>
+    <div class="config">
+      <input id="api" placeholder="https://your-worker.workers.dev">
+      <input id="key" type="password" placeholder="Teacher key">
+      <button onclick="saveConfig()">Save & Load</button>
+    </div>
+  </section>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('students',this)">Students</button>
+    <button class="tab" onclick="showTab('class',this)">Class Weakness</button>
+    <button class="tab" onclick="showTab('student',this)">Student Analysis</button>
+  </div>
+
+  <section id="studentsTab">
+    <div class="cards">
+      <div class="card"><div class="small">STUDENTS</div><div class="big" id="studentCount">0</div></div>
+      <div class="card"><div class="small">ACTIVE RECORDS</div><div class="big" id="attemptCount">0</div></div>
+      <div class="card"><div class="small">LATEST ACTIVITY</div><div class="big" id="latest" style="font-size:1rem">—</div></div>
+      <div class="card"><div class="small">SYSTEM</div><div class="big" id="status" style="font-size:1rem">Not connected</div></div>
+    </div>
+    <div class="panel"><table><thead><tr><th>Student</th><th>ID</th><th>Class</th><th>Attempts</th><th>Last activity</th><th></th></tr></thead><tbody id="studentsBody"></tbody></table></div>
+  </section>
+
+  <section id="classTab" class="hide">
+    <div class="panel">
+      <h2>Class-level Weak Areas</h2>
+      <div id="classWeak"></div>
+    </div>
+  </section>
+
+  <section id="studentTab" class="hide">
+    <div class="panel">
+      <h2 id="studentTitle">Student Analysis</h2>
+      <div id="studentSummary" class="cards"></div>
+      <h3>Module Mastery</h3>
+      <div id="moduleTable"></div>
+      <h3>Weakness Diagnosis</h3>
+      <div id="weakRoutes"></div>
+      <h3>Wrong Questions</h3>
+      <div id="wrongQuestions"></div>
+    </div>
+  </section>
+</div>
+
+<script>
+let API="", KEY="";
+
+function loadConfig(){
+  API=localStorage.getItem("ch8_api")||"";
+  KEY=localStorage.getItem("ch8_teacher_key")||"";
+  document.getElementById("api").value=API;
+  document.getElementById("key").value=KEY;
+  if(API&&KEY)loadStudents();
+}
+function saveConfig(){
+  API=document.getElementById("api").value.trim().replace(/\/$/,"");
+  KEY=document.getElementById("key").value.trim();
+  localStorage.setItem("ch8_api",API);
+  localStorage.setItem("ch8_teacher_key",KEY);
+  loadStudents();
+}
+async function api(path){
+  const r=await fetch(API+path,{headers:{"X-Teacher-Key":KEY}});
+  const d=await r.json();
+  if(!r.ok)throw new Error(d.error||"API error");
+  return d;
+}
+function cls(p){return p>=85?"good":p>=70?"mid":"bad"}
+function showTab(name,btn){
+  ["students","class","student"].forEach(x=>document.getElementById(x+"Tab").classList.toggle("hide",x!==name));
+  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));btn.classList.add("active");
+  if(name==="class")loadClass();
+}
+async function loadStudents(){
+  try{
+    const d=await api("/api/students");
+    document.getElementById("status").textContent="Connected";
+    const arr=d.students||[];
+    document.getElementById("studentCount").textContent=arr.length;
+    document.getElementById("attemptCount").textContent=arr.reduce((s,x)=>s+Number(x.total_attempts||0),0);
+    const latest=arr.map(x=>x.last_activity).filter(Boolean).sort().reverse()[0];
+    document.getElementById("latest").textContent=latest?new Date(latest+"Z").toLocaleString():"—";
+    document.getElementById("studentsBody").innerHTML=arr.map(x=>`<tr>
+      <td>${esc(x.student_name)}</td><td>${esc(x.student_code)}</td><td>${esc(x.class_name||"")}</td>
+      <td>${x.total_attempts||0}</td><td>${x.last_activity||"—"}</td>
+      <td><button onclick='loadStudent(${JSON.stringify(x.student_code)})'>Analyse</button></td></tr>`).join("");
+  }catch(e){document.getElementById("status").textContent=e.message}
+}
+async function loadClass(){
+  try{
+    const d=await api("/api/class-overview");
+    const weak=d.weak_areas||[];
+    document.getElementById("classWeak").innerHTML=weak.length?weak.map(x=>`<div class="route">
+      <b>${esc(x.topic)} · ${esc(x.skill_type)}</b>
+      <p>Accuracy: <span class="${cls(Number(x.accuracy))}">${x.accuracy}%</span> · Wrong ${x.wrong_count}/${x.total_questions}</p>
+      <div class="bar"><i style="width:${x.accuracy}%"></i></div>
+    </div>`).join(""):"No data yet.";
+  }catch(e){document.getElementById("classWeak").textContent=e.message}
+}
+async function loadStudent(code){
+  try{
+    const d=await api("/api/student-report?student_code="+encodeURIComponent(code));
+    document.getElementById("studentTitle").textContent=d.student.student_name+" · "+d.student.student_code;
+    const attempts=d.attempts||[];
+    const avg=attempts.length?Math.round(attempts.reduce((s,x)=>s+Number(x.percentage),0)/attempts.length):0;
+    const mastered=attempts.filter(x=>Number(x.percentage)>=80).length;
+    document.getElementById("studentSummary").innerHTML=`
+      <div class="card"><div class="small">MODULES DONE</div><div class="big">${attempts.length}</div></div>
+      <div class="card"><div class="small">AVERAGE</div><div class="big ${cls(avg)}">${avg}%</div></div>
+      <div class="card"><div class="small">MASTERED</div><div class="big">${mastered}</div></div>
+      <div class="card"><div class="small">CLASS</div><div class="big" style="font-size:1.1rem">${esc(d.student.class_name||"—")}</div></div>`;
+    document.getElementById("moduleTable").innerHTML=`<table><thead><tr><th>Module</th><th>Score</th><th>Status</th><th>Attempted</th></tr></thead><tbody>${
+      attempts.map(x=>`<tr><td>${esc(x.module_code)} · ${esc(x.module_title)}</td><td class="${cls(Number(x.percentage))}">${x.percentage}%</td><td>${esc(x.mastery_status)}</td><td>${x.attempted_at}</td></tr>`).join("")
+    }</tbody></table>`;
+    const weak=(d.weakness||[]).slice(0,8);
+    document.getElementById("weakRoutes").innerHTML=weak.length?weak.map((x,i)=>`<div class="route">
+      <b>Priority ${i+1}: ${esc(x.topic)} · ${esc(x.skill_type)}</b>
+      <p>Accuracy ${x.accuracy}%. ${remedy(x)}</p>
+    </div>`).join(""):"No weakness data.";
+    const wrong=d.wrong_questions||[];
+    document.getElementById("wrongQuestions").innerHTML=wrong.length?wrong.map(x=>`<div class="route">
+      <b>${esc(x.module_code)} · ${esc(x.topic||"")}</b>
+      <p>${esc(x.question_text)}</p>
+      <p><span class="bad">Student:</span> ${esc(x.student_answer||"")}<br><span class="good">Correct:</span> ${esc(x.correct_answer)}</p>
+      <p>${x.explanation||""}</p>
+    </div>`).join(""):"No wrong questions recorded.";
+    document.querySelectorAll(".tab")[2].click();
+  }catch(e){alert(e.message)}
+}
+function remedy(x){
+  const skill=(x.skill_type||"").toLowerCase();
+  if(skill.includes("calculation"))return "Redo calculation questions only, then complete Correction Battle until accuracy reaches 80%.";
+  if(skill.includes("diagram"))return "Redo diagram-reading questions and identify the English science keywords before answering.";
+  if(skill.includes("application"))return "Revise the core rule first, then practise real-life application questions.";
+  if(Number(x.accuracy)<50)return "Relearn the core concept briefly, then redo the module from Stage 1.";
+  return "Redo only this weak concept and complete the wrong-answer correction route.";
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+loadConfig();
+</script>
+</body>
+</html>

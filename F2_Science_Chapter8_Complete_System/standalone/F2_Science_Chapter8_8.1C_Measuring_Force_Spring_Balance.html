@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Form 2 Science 8.1C — Measuring Force</title>
+<style>
+:root{--bg:#07111d;--p:#0b1b2d;--p2:#102840;--line:#2c4d68;--txt:#f5f8fb;--mut:#a9bfd3;--a:#68d4ff;--g:#6bdd97;--r:#ff7777;--y:#ffd166}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0,#153d5e 0,transparent 34%),linear-gradient(#050a11,var(--bg));color:var(--txt);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
+.wrap{max-width:1060px;margin:auto;padding:20px}.top{position:sticky;top:8px;z-index:5;background:#09192bdc;backdrop-filter:blur(10px);border:1px solid #294963;border-radius:17px;padding:14px 16px;display:flex;justify-content:space-between;gap:15px;align-items:center}
+.top b{display:block}.small{font-size:.84rem;color:var(--mut)}.prog{width:330px;max-width:45vw}.bar{height:9px;border-radius:20px;background:#050d17;border:1px solid #26445f;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--g));transition:.3s}
+.hero{padding:44px 4px 26px;display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}.kicker{color:var(--a);font-size:.82rem;font-weight:900;letter-spacing:1px}.hero h1{font-size:clamp(2.4rem,6vw,4.8rem);line-height:.98;margin:8px 0 14px}.hero h1 span{color:var(--a)}.hero p{color:var(--mut);line-height:1.65}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.chip{border:1px solid #315777;background:#0c2137;border-radius:99px;padding:7px 11px;font-size:.84rem}
+.card{background:linear-gradient(145deg,#102a46,#091827);border:1px solid #2c5274;border-radius:24px;padding:20px;box-shadow:0 25px 70px #0006}.diagram{height:290px;display:grid;place-items:center}
+.btn{border:0;border-radius:13px;padding:12px 18px;font-weight:850;background:linear-gradient(135deg,var(--a),#a0eaff);color:#04111b;cursor:pointer}.btn.alt{background:#132a43;color:white;border:1px solid #345674}
+input{padding:12px 13px;border:1px solid #31516c;background:#091827;color:white;border-radius:13px;min-width:230px}.start{display:flex;gap:9px;flex-wrap:wrap}
+.game{display:none;border:1px solid #294c69;background:#081726;border-radius:24px;overflow:hidden;margin-top:20px}.game.on{display:block}.head{background:#0c2136;border-bottom:1px solid #29465f;padding:17px 20px;display:flex;justify-content:space-between;align-items:center}.head h2{margin:4px 0 0;font-size:1.3rem}.stats{display:flex;gap:8px}.stat{border:1px solid #31516d;border-radius:10px;padding:8px 10px;font-size:.84rem}.body{padding:22px}.scene{height:300px;border:1px solid #29465f;background:linear-gradient(#10243a,#08131f);border-radius:18px;display:grid;place-items:center;padding:12px}.scene svg{width:100%;height:265px}.q{font-weight:850;font-size:1.2rem;line-height:1.45;margin:18px 0 12px}.opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}.opt{padding:13px 14px;text-align:left;border-radius:13px;border:1px solid #31516d;background:#10243b;color:white;font-weight:750;cursor:pointer}.opt:hover{border-color:var(--a);transform:translateY(-1px)}.opt.good{border-color:var(--g);background:#153b2b}.opt.bad{border-color:var(--r);background:#3b1d26}.opt:disabled{cursor:default}.fb{display:none;border:1px solid #31516d;background:#0b1e31;border-radius:14px;padding:15px;margin-top:13px;line-height:1.65}.fb.show{display:block}.nav{display:flex;justify-content:flex-end;margin-top:14px}.hide{display:none!important}
+.results{display:none;padding:25px}.results.on{display:block}.score{width:155px;height:155px;border-radius:50%;border:11px solid #315a7a;margin:auto;display:grid;place-items:center;text-align:center;background:#0d2136}.score b{font-size:2rem}.master{text-align:center;border:1px solid #2c4e6b;background:#0d2136;border-radius:16px;padding:16px;margin:18px 0}.wrong{border:1px solid #304d66;background:#0b1b2d;border-radius:15px;padding:14px;margin:10px 0}.wrong .ca{color:#91e9ad;font-weight:850}.wrong .ex{color:#c1d2e2;line-height:1.6;margin-top:6px}.footer{text-align:center;color:#728ba3;padding:28px 0;font-size:.8rem}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.opts{grid-template-columns:1fr}.prog{max-width:100%;width:100%}.top{align-items:flex-start;flex-direction:column}.stats{flex-wrap:wrap}.diagram{height:240px}.scene{height:250px}}
+</style>
+</head>
+<body><div class="wrap">
+<div class="top"><div><b>FORM 2 SCIENCE · CHAPTER 8</b><span class="small">8.1C Measuring Force</span></div><div class="prog"><div class="small" style="display:flex;justify-content:space-between"><span id="pt">Ready</span><span id="pp">0%</span></div><div class="bar"><i id="pb"></i></div></div></div>
+
+<section class="hero">
+<div><div class="kicker">8.1 FORCE · MOE MASTERY CHECK</div><h1>SPRING BALANCE<br><span>LAB</span></h1>
+<p>Test whether you can identify the correct instrument, read a spring balance, use the S.I. unit of force and interpret simple force measurements from Chapter 8.1.</p>
+<div class="chips"><span class="chip">Spring balance</span><span class="chip">Newton (N)</span><span class="chip">Reading scales</span><span class="chip">20 Questions</span></div>
+<div class="start"><input id="name" placeholder="Student name"><button class="btn" onclick="start()">Start Challenge</button></div></div>
+<div class="card"><div class="diagram">
+<svg viewBox="0 0 520 300">
+<rect x="210" y="20" width="100" height="220" rx="22" fill="#eaf4fb" stroke="#7aa0bd" stroke-width="5"/>
+<rect x="235" y="50" width="50" height="150" rx="7" fill="#ffffff"/>
+<line x1="260" y1="60" x2="260" y2="190" stroke="#172536" stroke-width="4"/>
+<g stroke="#172536" stroke-width="3">
+<line x1="260" y1="70" x2="280" y2="70"/><line x1="260" y1="95" x2="280" y2="95"/><line x1="260" y1="120" x2="280" y2="120"/><line x1="260" y1="145" x2="280" y2="145"/><line x1="260" y1="170" x2="280" y2="170"/>
+</g>
+<g fill="#172536" font-size="16" font-weight="800">
+<text x="290" y="76">0</text><text x="290" y="101">1</text><text x="290" y="126">2</text><text x="290" y="151">3</text><text x="290" y="176">4</text>
+</g>
+<circle cx="260" cy="145" r="8" fill="#ff6f61"/>
+<path d="M260 240 v25" stroke="#d9e6ef" stroke-width="5"/><path d="M260 265 q-18 25 0 28 q18 -3 0 -28" fill="none" stroke="#d9e6ef" stroke-width="5"/>
+<text x="260" y="292" text-anchor="middle" fill="#bfefff" font-size="19" font-weight="900">SPRING BALANCE</text>
+</svg></div></div></section>
+
+<section id="game" class="game"><div class="head"><div><div class="kicker" id="sl">STAGE 1</div><h2 id="st">Instrument & Unit</h2></div><div class="stats"><div class="stat">Question <b id="qc">1/20</b></div><div class="stat">Score <b id="sc">0</b></div></div></div>
+<div id="quiz" class="body"><div id="scene" class="scene"></div><div id="question" class="q"></div><div id="opts" class="opts"></div><div id="fb" class="fb"></div><div class="nav"><button id="next" class="btn alt hide" onclick="next()">Next Question</button></div></div>
+<div id="res" class="results"><div class="score"><div><b id="pct">0%</b><div class="small" id="raw"></div></div></div><div class="master"><h2 id="mt"></h2><div id="md" class="small"></div></div><h2>Wrong-Answer Review · 错题详细解释</h2><div id="wl"></div><div class="nav" style="gap:8px"><button class="btn alt" onclick="restart()">Try Again</button><button class="btn" onclick="correct()">Correction Battle</button></div></div></section>
+<div class="footer">Form 2 Science · Chapter 8.1C · Measuring Force</div>
+</div>
+<script>
+function scale(reading,max=5){
+  const y0=55,y1=215, x=260, span=y1-y0, y=y0+(reading/max)*span;
+  let ticks="",labels="";
+  for(let i=0;i<=max*2;i++){
+    let val=i/2, yy=y0+(val/max)*span, len=(i%2===0?28:16);
+    ticks+=`<line x1="${x}" y1="${yy}" x2="${x+len}" y2="${yy}" stroke="#172536" stroke-width="${i%2===0?3:2}"/>`;
+    if(i%2===0) labels+=`<text x="${x+38}" y="${yy+6}" fill="#172536" font-size="15" font-weight="800">${val}</text>`;
+  }
+  return `<svg viewBox="0 0 520 290"><rect x="195" y="20" width="130" height="235" rx="22" fill="#eaf4fb" stroke="#789ab6" stroke-width="5"/><rect x="225" y="42" width="80" height="185" rx="8" fill="white"/><line x1="${x}" y1="${y0}" x2="${x}" y2="${y1}" stroke="#172536" stroke-width="4"/>${ticks}${labels}<circle cx="${x}" cy="${y}" r="8" fill="#ff6f61"/><text x="352" y="145" fill="#bfefff" font-size="20" font-weight="900">N</text><path d="M260 255 v20" stroke="#d9e6ef" stroke-width="5"/><path d="M260 275 q-16 18 0 22 q16 -4 0 -22" fill="none" stroke="#d9e6ef" stroke-width="5"/></svg>`
+}
+const scenes={
+instrument: `<svg viewBox="0 0 520 290"><rect x="200" y="25" width="120" height="225" rx="22" fill="#eaf4fb" stroke="#789ab6" stroke-width="5"/><rect x="235" y="48" width="50" height="150" rx="8" fill="white"/><path d="M260 55 v135" stroke="#172536" stroke-width="4"/><g stroke="#172536" stroke-width="3"><line x1="260" y1="65" x2="282" y2="65"/><line x1="260" y1="95" x2="282" y2="95"/><line x1="260" y1="125" x2="282" y2="125"/><line x1="260" y1="155" x2="282" y2="155"/><line x1="260" y1="185" x2="282" y2="185"/></g><circle cx="260" cy="125" r="7" fill="#ff6f61"/><path d="M260 250 v18" stroke="#d9e6ef" stroke-width="5"/><text x="260" y="288" text-anchor="middle" fill="#bfefff" font-size="22" font-weight="900">?</text></svg>`,
+friction:`<svg viewBox="0 0 520 290"><rect x="80" y="210" width="360" height="20" rx="8" fill="#4c7393"/><rect x="110" y="150" width="100" height="60" rx="10" fill="#ffd166"/><text x="160" y="186" text-anchor="middle" fill="#332400" font-size="22" font-weight="900">BLOCK</text><path d="M210 180 H320" stroke="#9adf78" stroke-width="7"/><rect x="320" y="135" width="65" height="90" rx="12" fill="#eaf4fb" stroke="#789ab6" stroke-width="4"/><text x="352" y="180" text-anchor="middle" fill="#172536" font-size="16" font-weight="900">SPRING</text><text x="352" y="198" text-anchor="middle" fill="#172536" font-size="16" font-weight="900">BALANCE</text></svg>`
+};
+const Q=[
+[1,"Instrument","instrument","Which instrument is used to measure force?",["Thermometer","Spring balance","Measuring cylinder","Stopwatch"],1,"测量力要使用<strong>弹簧秤（spring balance）</strong>。Thermometer 测温度，measuring cylinder 测液体体积，stopwatch 测时间。"],
+[1,"Unit","instrument","What is the S.I. unit of force?",["kg","N","m","s"],1,"力的 S.I. 单位是<strong>牛顿（newton）</strong>，符号是 <strong>N</strong>。题目问 force unit 时不要写 kg，因为 kg 是质量（mass）的单位。"],
+[1,"Unit","instrument","The symbol N stands for...",["Normal","Newton","Number","Net"],1,"<strong>N</strong> 是<strong>牛顿（newton）</strong>的单位符号，是力（force）的 S.I. unit。"],
+[1,"Instrument","friction","Which instrument can be used to measure the pulling force on this block?",["Spring balance","Metre rule","Ammeter","Beaker"],0,"图中要测拉动物体所需的力，应使用<strong>弹簧秤（spring balance）</strong>。它可以直接给出以 newton (N) 表示的 force reading。"],
+[1,"Concept","instrument","Which quantity is measured in newtons?",["Mass","Force","Time","Length"],1,"<strong>牛顿（newton, N）</strong>是<strong>力（force）</strong>的单位。Mass 通常以 kg 或 g 表示。"],
+[1,"Concept","instrument","A spring balance reading is 3 N. What does the 3 N represent?",["Mass","Force magnitude","Length","Time"],1,"3 N 表示这个力的<strong>大小（force magnitude）</strong>。因为 newton (N) 是 force 的单位。"],
+
+[2,"Reading","scale2","Read the spring balance.",["1.0 N","2.0 N","2.5 N","3.0 N"],1,"红色指针位于 <strong>2.0 N</strong> 刻度。读 spring balance 时要先看刻度单位，再确认指针对应的刻度值。"],
+[2,"Reading","scale35","What is the force reading shown?",["3.0 N","3.5 N","4.0 N","4.5 N"],1,"指针在 3 N 和 4 N 中间的小刻度，因此读数是 <strong>3.5 N</strong>。关键是先判断每一个小格代表多少 newton。"],
+[2,"Reading","scale15","What is the spring balance reading?",["1.0 N","1.5 N","2.0 N","2.5 N"],1,"指针位于 1 N 与 2 N 的中间刻度，所以读数为 <strong>1.5 N</strong>。"],
+[2,"Reading","scale45","Which reading is correct?",["4.0 N","4.5 N","5.0 N","45 N"],1,"指针在 4 N 和 5 N 的中间，因此是 <strong>4.5 N</strong>。45 N 明显把小数点丢了，人类最爱让小数点失踪。"],
+[2,"Unit","scale1","Which is the correct way to record this force measurement?",["1 kg","1 N","1 m","1 s"],1,"弹簧秤测得的是<strong>力（force）</strong>，所以记录时必须使用 <strong>N</strong>。"],
+[2,"Reading","scale25","The pointer is halfway between 2 N and 3 N. What is the reading?",["2.2 N","2.5 N","3.5 N","5 N"],1,"2 N 与 3 N 的正中间是 <strong>2.5 N</strong>。这类题是在检查学生是否真正会读刻度，而不是只认整数。"],
+
+[3,"Weight relation","instrument","According to the textbook approximation, an object of mass 100 g has a weight of approximately...",["0.1 N","1 N","10 N","100 N"],1,"课本使用的近似关系是 <strong>100 g ≈ 1 N</strong>。因此看到 100 g 时，对应的 weight 约为 1 N。"],
+[3,"Weight relation","instrument","Using the textbook approximation, what is the weight of a 300 g object?",["0.3 N","3 N","30 N","300 N"],1,"因为 <strong>100 g ≈ 1 N</strong>，所以 300 g 是三个 100 g，weight 约为 <strong>3 N</strong>。"],
+[3,"Weight relation","instrument","Using the textbook approximation, a 500 g object has a weight of approximately...",["0.5 N","5 N","50 N","500 N"],1,"500 g = 5 × 100 g，而每 100 g 约对应 1 N，所以 weight ≈ <strong>5 N</strong>。"],
+[3,"Weight relation","instrument","An object has a weight of about 4 N. Using the textbook approximation, its mass is about...",["40 g","400 g","4 g","4000 g"],1,"每 <strong>1 N ≈ 100 g</strong>，所以 4 N ≈ 4 × 100 g = <strong>400 g</strong>。"],
+[3,"Application","friction","A block is pulled at constant speed and the spring balance reads 2 N. Which force can this setup be used to investigate?",["Frictional force","Buoyant force","Gravitational force between planets","Magnetic force"],0,"这种装置可以用来测量物体与表面之间的<strong>摩擦力（frictional force）</strong>。拉力读数可用于比较不同表面产生的 friction。"],
+[3,"Technique","instrument","Before taking a reading from a spring balance, what should you check first?",["The colour of the object","The scale and unit","The room temperature only","The mass unit kg only"],1,"读 spring balance 前要先确认<strong>刻度（scale）</strong>以及<strong>单位（unit）</strong>。不先看刻度就直接猜数字，基本是在和分数作对。"],
+[3,"Concept","instrument","Which statement is correct?",["Spring balance measures mass in kg","Spring balance measures force in N","Spring balance measures time in s","Spring balance measures volume in cm³"],1,"<strong>弹簧秤（spring balance）</strong>测量的是<strong>力（force）</strong>，读数单位是 <strong>newton (N)</strong>。"],
+[3,"All","scale35","A student records this reading as 3.5 kg. What is wrong?",["The number is wrong","The unit is wrong; it should be N","The direction is wrong","Nothing is wrong"],1,"3.5 这个数值可以正确，但单位错了。Spring balance 测 force，所以应写 <strong>3.5 N</strong>，不是 kg。"]
+].map(x=>({stage:x[0],topic:x[1],scene:x[2],q:x[3],opts:x[4],a:x[5],exp:x[6]}));
+Q.forEach(x=>{
+ if(x.scene==="scale2") x.svg=scale(2);
+ if(x.scene==="scale35") x.svg=scale(3.5);
+ if(x.scene==="scale15") x.svg=scale(1.5);
+ if(x.scene==="scale45") x.svg=scale(4.5);
+ if(x.scene==="scale1") x.svg=scale(1);
+ if(x.scene==="scale25") x.svg=scale(2.5);
+});
+let order=[...Q],idx=0,score=0,wrong=[],answered=false,correction=false;
+function start(){localStorage.setItem("f2_81c_name",document.getElementById("name").value.trim()||"Student");reset();document.getElementById("game").classList.add("on");document.getElementById("game").scrollIntoView({behavior:"smooth"})}
+function reset(){order=[...Q];idx=0;score=0;wrong=[];correction=false;document.getElementById("res").classList.remove("on");document.getElementById("quiz").classList.remove("hide");render()}
+function meta(s){return s===1?["STAGE 1","Instrument & S.I. Unit"]:s===2?["STAGE 2","Read the Spring Balance"]:["STAGE 3","Measurement Mastery"]}
+function render(){if(idx>=order.length)return finish();answered=false;let x=order[idx],m=meta(x.stage);document.getElementById("sl").textContent=correction?"CORRECTION BATTLE":m[0];document.getElementById("st").textContent=correction?"Fix Your Mistakes":m[1];document.getElementById("qc").textContent=(idx+1)+"/"+order.length;document.getElementById("sc").textContent=score;document.getElementById("scene").innerHTML=x.svg||scenes[x.scene]||scenes.instrument;document.getElementById("question").textContent=x.q;let o=document.getElementById("opts");o.innerHTML="";x.opts.forEach((v,i)=>{let b=document.createElement("button");b.className="opt";b.textContent=v;b.onclick=()=>ans(i,b);o.appendChild(b)});document.getElementById("fb").className="fb";document.getElementById("next").classList.add("hide");progress()}
+function ans(c,b){if(answered)return;answered=true;let x=order[idx],bs=[...document.querySelectorAll(".opt")];bs.forEach(z=>z.disabled=true);bs[x.a].classList.add("good");let ok=c===x.a;if(ok)score++;else{b.classList.add("bad");if(!correction)wrong.push({...x,chosen:x.opts[c]})}let f=document.getElementById("fb");f.className="fb show";f.innerHTML=`<strong>${ok?"Correct · 答对了":"Incorrect · 答错了"}</strong><br><b>正确答案（Correct answer）：</b> ${x.opts[x.a]}<br><b>详细解释：</b> ${x.exp}`;document.getElementById("sc").textContent=score;document.getElementById("next").classList.remove("hide")}
+function next(){idx++;render()}function progress(){let p=Math.round(idx/order.length*100);document.getElementById("pb").style.width=p+"%";document.getElementById("pp").textContent=p+"%";document.getElementById("pt").textContent=correction?"Correction":"Mastery challenge"}
+function finish(){document.getElementById("quiz").classList.add("hide");document.getElementById("res").classList.add("on");document.getElementById("pb").style.width="100%";document.getElementById("pp").textContent="100%";let p=Math.round(score/order.length*100);document.getElementById("pct").textContent=p+"%";document.getElementById("raw").textContent=score+" / "+order.length;let t=document.getElementById("mt"),d=document.getElementById("md");if(p>=80){t.textContent="MASTERED";d.textContent="You can identify the instrument, use newtons and read spring-balance measurements accurately."}else if(p>=60){t.textContent="ALMOST MASTERED";d.textContent="Some scale readings or unit concepts still need correction."}else{t.textContent="REVISION REQUIRED";d.textContent="Review spring balance, newton and scale reading before retrying."}let w=document.getElementById("wl");w.innerHTML=wrong.length?"":'<div class="wrong"><b>No wrong answers.</b><div class="ex">Excellent. Measuring force is secure.</div></div>';wrong.forEach((x,i)=>w.innerHTML+=`<div class="wrong"><b>${i+1}. ${x.q}</b><div>Your answer: ${x.chosen}</div><div class="ca">Correct answer: ${x.opts[x.a]}</div><div class="ex"><b>解释：</b>${x.exp}</div></div>`);localStorage.setItem("f2_81c_last",JSON.stringify({score,total:order.length,p,date:new Date().toISOString()}))}
+function restart(){reset()}function correct(){if(!wrong.length)return reset();order=wrong.map(x=>({...x}));idx=0;score=0;correction=true;document.getElementById("res").classList.remove("on");document.getElementById("quiz").classList.remove("hide");render()}
+window.onload=()=>{let n=localStorage.getItem("f2_81c_name");if(n)document.getElementById("name").value=n}
+</script></body></html>

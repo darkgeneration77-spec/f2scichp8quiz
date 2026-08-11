@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form 2 Science Chapter 8.1A — Types of Force</title>
+<style>
+:root{
+  --bg:#07111f;
+  --panel:#0d1b2e;
+  --panel2:#12263f;
+  --line:#284b73;
+  --text:#f5f7fb;
+  --muted:#aec2d9;
+  --accent:#65c7ff;
+  --accent2:#9de56b;
+  --warn:#ffd166;
+  --bad:#ff6b6b;
+  --good:#54d68a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%,rgba(55,118,180,.35),transparent 35%),
+    linear-gradient(180deg,#050b13 0%,var(--bg) 100%);
+  color:var(--text);
+  min-height:100vh;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.wrap{max-width:1100px;margin:auto;padding:24px}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:16px 18px;border:1px solid #244260;border-radius:18px;
+  background:rgba(10,25,43,.88);backdrop-filter:blur(12px);
+  position:sticky;top:10px;z-index:20;
+}
+.brand b{display:block;font-size:1.08rem;letter-spacing:.4px}
+.brand span{color:var(--muted);font-size:.88rem}
+.progress-shell{flex:1;max-width:430px}
+.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:.8rem;margin-bottom:6px}
+.progress{height:9px;border-radius:99px;background:#07111f;overflow:hidden;border:1px solid #243e5b}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.35s}
+.hero{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:24px;
+  padding:40px 0 26px;align-items:center;
+}
+.hero h1{font-size:clamp(2.3rem,6vw,5rem);line-height:.96;margin:0 0 16px}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);font-size:1.05rem;line-height:1.65;max-width:680px}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+.badge{
+  border:1px solid #315c83;background:#0e2238;padding:8px 12px;border-radius:999px;
+  color:#d9edff;font-size:.88rem;
+}
+.hero-card{
+  border:1px solid #2a557b;background:linear-gradient(145deg,#102944,#091827);
+  border-radius:28px;padding:22px;min-height:320px;position:relative;overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.32);
+}
+.force-scene{position:relative;height:275px}
+.floor{position:absolute;bottom:45px;left:6%;right:6%;height:12px;border-radius:99px;background:#42698c}
+.box{
+  position:absolute;width:120px;height:85px;left:50%;bottom:57px;transform:translateX(-50%);
+  border-radius:16px;background:linear-gradient(145deg,#ffd166,#e7a93a);
+  border:4px solid #fff2be;color:#291d00;display:grid;place-items:center;font-weight:900;font-size:1.1rem;
+}
+.arrow{position:absolute;font-weight:900;color:#fff;animation:float 1.8s ease-in-out infinite}
+.arrow.up{left:49%;bottom:155px;color:#72e7ff}
+.arrow.down{left:49%;bottom:8px;color:#ff907e}
+.arrow.right{left:67%;bottom:90px;color:#a9ee72}
+.arrow.left{right:67%;bottom:90px;color:#ffcf70}
+@keyframes float{50%{transform:translateY(-7px)}}
+.cta{
+  border:0;border-radius:14px;padding:13px 20px;font-weight:800;
+  background:linear-gradient(135deg,var(--accent),#88e5ff);color:#03101b;
+  box-shadow:0 8px 25px rgba(101,199,255,.25)
+}
+.cta.secondary{background:#152a43;color:white;border:1px solid #315774;box-shadow:none}
+.section-title{margin:26px 0 12px}
+.force-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.force-card{
+  border:1px solid #274868;border-radius:18px;background:#0b1a2c;padding:16px;min-height:130px;
+}
+.force-card b{display:block;margin:8px 0;color:#eaf7ff}
+.force-card span{color:var(--muted);font-size:.9rem;line-height:1.45}
+.icon{font-size:2rem}
+.game{
+  display:none;margin-top:20px;border:1px solid #274868;background:#081726;border-radius:26px;
+  overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.3)
+}
+.game.active{display:block}
+.stage-head{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:18px 20px;border-bottom:1px solid #25435f;background:#0d2035;
+}
+.stage-kicker{color:var(--accent);font-weight:800;font-size:.84rem;text-transform:uppercase;letter-spacing:1px}
+.stage-head h2{margin:4px 0 0;font-size:1.35rem}
+.stats{display:flex;gap:8px;flex-wrap:wrap}
+.stat{padding:8px 11px;border:1px solid #31516e;border-radius:10px;color:#d9e8f7;font-size:.86rem}
+.qwrap{padding:24px}
+.scene{
+  min-height:220px;border:1px solid #263f5c;background:linear-gradient(180deg,#102239,#091523);
+  border-radius:20px;padding:18px;display:grid;place-items:center;overflow:hidden;position:relative;
+}
+.scene svg{max-width:100%;height:190px}
+.question{font-size:1.25rem;font-weight:800;line-height:1.45;margin:20px 0 14px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.option{
+  text-align:left;padding:14px 16px;border-radius:14px;border:1px solid #31516e;
+  background:#10223a;color:white;transition:.15s;font-weight:700;
+}
+.option:hover{transform:translateY(-2px);border-color:#6fcfff;background:#14304f}
+.option.correct{background:rgba(84,214,138,.18);border-color:var(--good)}
+.option.wrong{background:rgba(255,107,107,.15);border-color:var(--bad)}
+.option:disabled{cursor:not-allowed;opacity:.9}
+.feedback{
+  display:none;margin-top:14px;padding:15px 16px;border-radius:14px;border:1px solid #31516e;
+  background:#0c1e31;line-height:1.55;
+}
+.feedback.show{display:block}
+.feedback.good{border-color:#2b8c59}
+.feedback.bad{border-color:#a74343}
+.feedback b{display:block;margin-bottom:4px}
+.controls{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+.hidden{display:none!important}
+.results{display:none;padding:26px}
+.results.active{display:block}
+.score-ring{
+  width:160px;height:160px;border-radius:50%;margin:8px auto 20px;
+  display:grid;place-items:center;border:12px solid #2c5375;background:#0d2035;text-align:center
+}
+.score-ring strong{font-size:2.1rem}
+.score-ring span{display:block;color:var(--muted);font-size:.82rem}
+.mastery{
+  text-align:center;padding:18px;border-radius:18px;background:#0d2035;border:1px solid #2a4d6a;margin-bottom:18px
+}
+.mastery h3{margin:0 0 6px}
+.mastery p{margin:0;color:var(--muted)}
+.topic-bars{display:grid;gap:10px;margin:20px 0}
+.topic-row{display:grid;grid-template-columns:160px 1fr 55px;gap:10px;align-items:center}
+.topic-row .bar{height:10px;background:#07111f;border-radius:99px;overflow:hidden;border:1px solid #263f5a}
+.topic-row .bar i{display:block;height:100%;background:linear-gradient(90deg,#55c3ff,#9ae570)}
+.wrongbook{margin-top:24px}
+.wrong-item{border:1px solid #334d66;background:#0b1b2d;border-radius:16px;padding:15px;margin:10px 0}
+.wrong-item .ans{color:#9de56b;font-weight:800}
+.wrong-item .exp{color:var(--muted);margin-top:6px;line-height:1.5}
+.footer{color:#7893ae;text-align:center;padding:30px 0 12px;font-size:.83rem}
+.namebox{display:flex;gap:10px;max-width:540px;margin-top:16px}
+.namebox input{
+  flex:1;padding:13px 14px;border-radius:14px;border:1px solid #33516c;background:#0b1929;color:white;outline:none
+}
+.namebox input:focus{border-color:var(--accent)}
+@media(max-width:800px){
+  .hero{grid-template-columns:1fr}
+  .hero-card{min-height:270px}
+  .force-grid{grid-template-columns:1fr 1fr}
+  .options{grid-template-columns:1fr}
+  .topbar{align-items:flex-start;flex-direction:column}
+  .progress-shell{width:100%;max-width:none}
+  .topic-row{grid-template-columns:110px 1fr 45px;font-size:.83rem}
+}
+@media(max-width:520px){
+  .wrap{padding:14px}
+  .force-grid{grid-template-columns:1fr}
+  .hero h1{font-size:2.6rem}
+  .namebox{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">
+      <b>FORM 2 SCIENCE · CHAPTER 8</b>
+      <span>8.1A Types of Force</span>
+    </div>
+    <div class="progress-shell">
+      <div class="progress-label"><span id="progressText">Ready</span><span id="progressPct">0%</span></div>
+      <div class="progress"><i id="progressBar"></i></div>
+    </div>
+  </div>
+
+  <section class="hero" id="home">
+    <div>
+      <div class="stage-kicker">MOE-aligned mastery challenge</div>
+      <h1>FORCE<br><span>DETECTOR</span></h1>
+      <p>
+        Test whether you can recognise and apply the six types of force in Chapter 8.1:
+        gravitational force, weight, normal force, frictional force, elastic force and buoyant force.
+      </p>
+      <div class="badges">
+        <span class="badge">20 Questions</span>
+        <span class="badge">3 Stages</span>
+        <span class="badge">Instant Feedback</span>
+        <span class="badge">Wrong-Answer Review</span>
+      </div>
+      <div class="namebox">
+        <input id="studentName" placeholder="Enter student name" maxlength="30">
+        <button class="cta" onclick="startGame()">Start Challenge</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="force-scene">
+        <div class="box">OBJECT</div>
+        <div class="floor"></div>
+        <div class="arrow up">↑ Normal / Buoyant</div>
+        <div class="arrow down">↓ Weight</div>
+        <div class="arrow right">→ Push</div>
+        <div class="arrow left">← Friction</div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Forces you must recognise</h2>
+  <div class="force-grid">
+    <div class="force-card"><div class="icon">↓</div><b>Gravitational Force</b><span>The force of attraction between masses. Near Earth, gravity pulls objects towards Earth.</span></div>
+    <div class="force-card"><div class="icon">W</div><b>Weight</b><span>The gravitational force acting on an object.</span></div>
+    <div class="force-card"><div class="icon">↑</div><b>Normal Force</b><span>The support force exerted by a surface on an object in contact with it.</span></div>
+    <div class="force-card"><div class="icon">⇠</div><b>Frictional Force</b><span>A force that opposes relative motion between surfaces in contact.</span></div>
+    <div class="force-card"><div class="icon">↔</div><b>Elastic Force</b><span>A restoring force produced when an elastic object is stretched or compressed.</span></div>
+    <div class="force-card"><div class="icon">↑</div><b>Buoyant Force</b><span>An upward force exerted by a fluid on an object immersed in it.</span></div>
+  </div>
+
+  <section class="game" id="game">
+    <div class="stage-head">
+      <div>
+        <div class="stage-kicker" id="stageLabel">Stage 1</div>
+        <h2 id="stageTitle">Recognise the Force</h2>
+      </div>
+      <div class="stats">
+        <div class="stat">Question <b id="qCount">1/20</b></div>
+        <div class="stat">Score <b id="score">0</b></div>
+      </div>
+    </div>
+    <div class="qwrap" id="quizArea">
+      <div class="scene" id="scene"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="controls">
+        <button class="cta secondary hidden" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+      </div>
+    </div>
+
+    <div class="results" id="results">
+      <div class="score-ring">
+        <div><strong id="finalScore">0%</strong><span id="rawScore">0 / 20</span></div>
+      </div>
+      <div class="mastery">
+        <h3 id="masteryTitle">Mastery Status</h3>
+        <p id="masteryText"></p>
+      </div>
+      <div class="topic-bars" id="topicBars"></div>
+      <div class="wrongbook">
+        <h2>Wrong-Answer Review · 错题详细解释</h2>
+        <div id="wrongList"></div>
+      </div>
+      <div class="controls">
+        <button class="cta secondary" onclick="restartGame()">Try Again</button>
+        <button class="cta" onclick="redoWrong()">Correction Battle</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">Form 2 Science · Chapter 8.1A · Types of Force</div>
+</div>
+
+<script>
+const SVG = {
+  book: `<svg viewBox="0 0 500 230" aria-label="book on a table">
+    <rect x="120" y="160" width="270" height="18" rx="8" fill="#52779a"/>
+    <rect x="195" y="102" width="120" height="58" rx="8" fill="#ffd166" stroke="#fff1b5" stroke-width="4"/>
+    <text x="255" y="138" fill="#2b210b" font-size="22" text-anchor="middle" font-weight="800">BOOK</text>
+    <path d="M255 95 L255 45" stroke="#68d8ff" stroke-width="8"/><path d="M255 45 l-14 20 h28z" fill="#68d8ff"/>
+    <text x="278" y="60" fill="#a8eaff" font-size="18">?</text>
+  </svg>`,
+  falling: `<svg viewBox="0 0 500 230">
+    <circle cx="250" cy="80" r="36" fill="#ffcf5a" stroke="#fff1b5" stroke-width="4"/>
+    <path d="M250 122 L250 188" stroke="#ff8579" stroke-width="8"/><path d="M250 188 l-14 -20 h28z" fill="#ff8579"/>
+    <path d="M120 42 h80 M140 66 h55 M305 35 h80" stroke="#355a7b" stroke-width="6" stroke-linecap="round"/>
+    <text x="285" y="160" fill="#ffb0a8" font-size="18">Earth pulls down</text>
+  </svg>`,
+  water: `<svg viewBox="0 0 500 230">
+    <rect x="70" y="80" width="360" height="120" rx="10" fill="#143a5c" stroke="#4c83aa" stroke-width="4"/>
+    <path d="M70 100 Q100 88 130 100 T190 100 T250 100 T310 100 T370 100 T430 100" fill="none" stroke="#73d9ff" stroke-width="5"/>
+    <rect x="210" y="72" width="80" height="55" rx="8" fill="#ffd166"/>
+    <path d="M250 75 L250 35" stroke="#6ee5ff" stroke-width="8"/><path d="M250 35 l-14 20 h28z" fill="#6ee5ff"/>
+    <text x="275" y="50" fill="#baf2ff" font-size="18">?</text>
+  </svg>`,
+  slide: `<svg viewBox="0 0 500 230">
+    <rect x="90" y="160" width="320" height="18" rx="9" fill="#446b8e"/>
+    <rect x="185" y="100" width="115" height="60" rx="10" fill="#f1b24c"/>
+    <path d="M185 130 L125 130" stroke="#ffcf70" stroke-width="8"/><path d="M125 130 l20 -14 v28z" fill="#ffcf70"/>
+    <path d="M300 130 L365 130" stroke="#8be976" stroke-width="8"/><path d="M365 130 l-20 -14 v28z" fill="#8be976"/>
+    <text x="125" y="105" fill="#ffd98a" font-size="18">?</text>
+    <text x="327" y="105" fill="#baf3a2" font-size="18">motion</text>
+  </svg>`,
+  spring: `<svg viewBox="0 0 500 230">
+    <rect x="70" y="100" width="55" height="80" rx="8" fill="#486a88"/>
+    <path d="M125 140 L160 140 L175 115 L195 165 L215 115 L235 165 L255 115 L275 165 L295 140 L350 140" fill="none" stroke="#7ee0ff" stroke-width="7"/>
+    <rect x="350" y="105" width="80" height="70" rx="10" fill="#ffd166"/>
+    <path d="M350 140 L310 140" stroke="#9ced7c" stroke-width="8"/><path d="M310 140 l20 -14 v28z" fill="#9ced7c"/>
+    <text x="315" y="110" fill="#c8f5b6" font-size="18">?</text>
+  </svg>`,
+  parachute: `<svg viewBox="0 0 500 230">
+    <path d="M150 85 Q250 -5 350 85 Z" fill="#65c7ff" stroke="#c2efff" stroke-width="4"/>
+    <path d="M150 85 L225 145 M350 85 L275 145 M250 85 L250 145" stroke="#9ed9f6" stroke-width="4"/>
+    <circle cx="250" cy="165" r="22" fill="#ffd166"/>
+    <path d="M250 187 L250 215" stroke="#ffd166" stroke-width="8"/>
+    <path d="M385 145 L320 145" stroke="#ffcf70" stroke-width="8"/><path d="M320 145 l20 -14 v28z" fill="#ffcf70"/>
+    <text x="355" y="125" fill="#ffd98a" font-size="18">opposes motion</text>
+  </svg>`
+};
+
+const questions = [
+ {stage:1,topic:"Normal force",scene:"book",q:"A book is resting on a table. Which force acts upward on the book because of the table?",opts:["Weight","Normal force","Elastic force","Buoyant force"],a:1,exp:"书本放在桌面时，桌面会对书本产生一个向上的<strong>法向力（Normal force）</strong>。这个力来自两个物体表面的接触，并且方向与接触面垂直。书本同时受到向下的<strong>重量（Weight）</strong>，所以不要把 Normal force 和 Weight 混在一起。"},
+ {stage:1,topic:"Weight",scene:"falling",q:"Which force shown here pulls the object vertically downward towards Earth?",opts:["Weight","Normal force","Buoyant force","Elastic force"],a:0,exp:"<strong>重量（Weight）</strong>就是地球的<strong>重力（Gravitational force）</strong>作用在物体上的力，方向指向地球。因此物体下落时，Weight 的方向是向下。"},
+ {stage:1,topic:"Buoyant force",scene:"water",q:"An object is floating in water. Which force from the water acts upward on the object?",opts:["Frictional force","Weight","Buoyant force","Elastic force"],a:2,exp:"物体浸在液体中时，液体会对物体产生向上的<strong>浮力（Buoyant force）</strong>。关键判断法：看到物体在水中、液体中或漂浮，就要检查是否存在 Buoyant force，而且它通常画成向上的箭头。"},
+ {stage:1,topic:"Frictional force",scene:"slide",q:"A box is sliding to the right on a rough surface. Which force acts opposite to the sliding motion?",opts:["Buoyant force","Frictional force","Weight","Elastic force"],a:1,exp:"<strong>摩擦力（Frictional force）</strong>出现在互相接触的表面之间，并且会阻碍两个表面之间的相对运动。题目若说物体向右滑动，摩擦力通常指向左，也就是与滑动趋势相反。"},
+ {stage:1,topic:"Elastic force",scene:"spring",q:"A stretched spring pulls the block back towards its original position. Which force is responsible?",opts:["Elastic force","Normal force","Weight","Buoyant force"],a:0,exp:"当弹簧、橡皮筋等弹性物体被<strong>拉伸（stretched）</strong>或<strong>压缩（compressed）</strong>时，会产生<strong>弹力（Elastic force）</strong>，使物体趋向恢复原来的形状或长度。"},
+ {stage:1,topic:"Gravitational force",scene:"falling",q:"Which type of force is caused by attraction between masses?",opts:["Elastic force","Frictional force","Gravitational force","Normal force"],a:2,exp:"<strong>重力（Gravitational force）</strong>是具有质量的物体之间产生的吸引力。它属于<strong>非接触力（non-contact force）</strong>，不需要两个物体直接碰触也能产生作用。"},
+
+ {stage:2,topic:"Weight",scene:"falling",q:"A mango falls from a tree. Which force is mainly responsible for pulling it towards the ground?",opts:["Weight","Buoyant force","Normal force","Elastic force"],a:0,exp:"芒果离开树枝后，受到向下的<strong>重量（Weight）</strong>作用，因此被拉向地面。Weight 是地球的 Gravitational force 作用在芒果上的结果。"},
+ {stage:2,topic:"Normal force",scene:"book",q:"A laptop is placed on a desk and remains at rest. Which force is exerted by the desk on the laptop?",opts:["Frictional force","Normal force","Gravitational force","Elastic force"],a:1,exp:"电脑与桌面接触，因此桌面对电脑产生<strong>法向力（Normal force）</strong>。Normal force 的方向与接触面<strong>垂直（perpendicular）</strong>；水平桌面上的 Normal force 因此向上。"},
+ {stage:2,topic:"Frictional force",scene:"slide",q:"A cyclist applies the brakes. Which force between the brake surfaces helps slow the bicycle?",opts:["Elastic force","Buoyant force","Frictional force","Weight"],a:2,exp:"刹车时，接触表面之间产生<strong>摩擦力（Frictional force）</strong>。摩擦力阻碍运动，因此能够使正在移动的脚车减速。看到 brake、rough surface、rubbing 等情境，要优先想到 Frictional force。"},
+ {stage:2,topic:"Elastic force",scene:"spring",q:"A rubber band is stretched and then released. Which force makes it return towards its original shape?",opts:["Normal force","Elastic force","Weight","Buoyant force"],a:1,exp:"橡皮筋被拉长后会尝试恢复原来的形状，这是<strong>弹力（Elastic force）</strong>的作用。关键词是 <strong>stretch / compress / return to original shape</strong>。"},
+ {stage:2,topic:"Buoyant force",scene:"water",q:"A swimmer feels an upward push from the water. This upward push is called...",opts:["normal force","buoyant force","weight","frictional force"],a:1,exp:"水会对浸在其中的物体产生向上的<strong>浮力（Buoyant force）</strong>。这里最重要的方向关键词是 <strong>upward force</strong>。"},
+ {stage:2,topic:"Frictional force",scene:"parachute",q:"A moving object rubs against a surface and becomes slower. Which force is involved?",opts:["Frictional force","Normal force","Buoyant force","Weight"],a:0,exp:"<strong>摩擦力（Frictional force）</strong>发生在接触表面之间，并阻碍它们之间的相对运动。判断时抓住两个关键词：<strong>surfaces in contact</strong> 和 <strong>opposes motion</strong>。"},
+ {stage:2,topic:"Gravitational force",scene:"falling",q:"Earth attracts the Moon and the Moon attracts Earth. This interaction is an example of...",opts:["normal force","elastic force","gravitational force","frictional force"],a:2,exp:"地球和月球都有质量，因此两者之间存在<strong>重力（Gravitational force）</strong>。它的关键性质是<strong>吸引（attraction）</strong>，而且不需要直接接触。"},
+
+ {stage:3,topic:"Normal force",scene:"book",q:"Which pair of forces acts in opposite vertical directions on a book resting on a horizontal table?",opts:["Weight and normal force","Elastic force and frictional force","Buoyant force and elastic force","Frictional force and weight"],a:0,exp:"书本静止在水平桌面上时，有两个重要的垂直力：<strong>重量（Weight）</strong>向下，桌面产生的<strong>法向力（Normal force）</strong>向上。考试图像题看到“object resting on a table”，这两个方向必须分清。"},
+ {stage:3,topic:"Buoyant force",scene:"water",q:"Which statement best describes buoyant force?",opts:["A downward force exerted by a solid surface","An upward force exerted by a fluid","A force only found in air","A force produced only by magnets"],a:1,exp:"<strong>浮力（Buoyant force）</strong>是<strong>流体（fluid）</strong>对浸在其中的物体产生的向上作用力。Fluid 包括液体和气体；本单元常见情境主要是物体在水中。"},
+ {stage:3,topic:"Elastic force",scene:"spring",q:"Which situation definitely involves elastic force?",opts:["A book lying on a desk","A stone falling","A stretched spring pulling back","A boat floating"],a:2,exp:"弹簧被拉伸后会产生<strong>弹力（Elastic force）</strong>，使它趋向恢复原来的状态。看到 <strong>spring / rubber band / stretched / compressed</strong>，就是辨认 Elastic force 的重要线索。"},
+ {stage:3,topic:"Frictional force",scene:"slide",q:"Which statement about frictional force is correct?",opts:["It always acts in the direction of motion","It opposes relative motion between touching surfaces","It only acts in liquids","It is the same as weight"],a:1,exp:"<strong>摩擦力（Frictional force）</strong>需要两个表面接触，并且它的作用是阻碍相对运动。它不会固定永远向左或向右，方向要根据物体的运动或运动趋势判断。"},
+ {stage:3,topic:"Weight",scene:"falling",q:"Which statement about weight is correct?",opts:["Weight is the gravitational force acting on an object","Weight is always upward","Weight is a contact force","Weight is the same as normal force"],a:0,exp:"<strong>重量（Weight）</strong>不是普通的“质量”。在科学定义中，Weight 是<strong>重力（Gravitational force）</strong>作用在物体上的力。因此 Weight 属于 force。"},
+ {stage:3,topic:"Normal force",scene:"book",q:"Which statement about normal force is correct?",opts:["It is exerted by a surface on an object in contact with it","It is always caused by stretching","It only acts underwater","It attracts all masses"],a:0,exp:"<strong>法向力（Normal force）</strong>是接触面对物体产生的支撑力。关键条件是<strong>surface in contact</strong>，方向通常与接触面垂直。"},
+ {stage:3,topic:"Gravitational force",scene:"falling",q:"Which of the following is a non-contact force in this chapter?",opts:["Normal force","Frictional force","Elastic force","Gravitational force"],a:3,exp:"<strong>重力（Gravitational force）</strong>属于<strong>非接触力（non-contact force）</strong>，两个物体不需要直接接触也能互相吸引。相反，Normal force、Frictional force 和 Elastic force 都需要物体之间存在接触或形变。"}
+];
+
+let order = [...questions];
+let idx = 0, score = 0, answered = false, wrong = [], topicStats = {};
+let correctionMode = false;
+const totalBase = questions.length;
+
+function startGame(){
+  const name = document.getElementById("studentName").value.trim() || "Student";
+  localStorage.setItem("f2sci_81a_name", name);
+  document.getElementById("game").classList.add("active");
+  document.getElementById("results").classList.remove("active");
+  document.getElementById("quizArea").classList.remove("hidden");
+  idx=0; score=0; wrong=[]; topicStats={}; correctionMode=false; order=[...questions];
+  render();
+  document.getElementById("game").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function stageMeta(stage){
+  if(stage===1) return ["STAGE 1","Recognise the Force"];
+  if(stage===2) return ["STAGE 2","Apply in Real Situations"];
+  return ["STAGE 3","Force Mastery Check"];
+}
+function render(){
+  if(idx>=order.length){ finish(); return; }
+  answered=false;
+  const item=order[idx];
+  const meta=stageMeta(item.stage);
+  document.getElementById("stageLabel").textContent=correctionMode?"CORRECTION BATTLE":meta[0];
+  document.getElementById("stageTitle").textContent=correctionMode?"Fix Every Mistake":meta[1];
+  document.getElementById("qCount").textContent=(idx+1)+"/"+order.length;
+  document.getElementById("score").textContent=score;
+  document.getElementById("scene").innerHTML=SVG[item.scene] || SVG.book;
+  document.getElementById("question").textContent=item.q;
+  document.getElementById("feedback").className="feedback";
+  document.getElementById("feedback").innerHTML="";
+  document.getElementById("nextBtn").classList.add("hidden");
+  const options=document.getElementById("options");
+  options.innerHTML="";
+  item.opts.forEach((op,i)=>{
+    const b=document.createElement("button");
+    b.className="option"; b.textContent=op;
+    b.onclick=()=>answer(i,b);
+    options.appendChild(b);
+  });
+  updateProgress();
+}
+function answer(choice,btn){
+  if(answered)return;
+  answered=true;
+  const item=order[idx];
+  const buttons=[...document.querySelectorAll(".option")];
+  buttons.forEach(b=>b.disabled=true);
+  buttons[item.a].classList.add("correct");
+  const ok=choice===item.a;
+  if(!ok) btn.classList.add("wrong");
+  if(!topicStats[item.topic]) topicStats[item.topic]={right:0,total:0};
+  topicStats[item.topic].total++;
+  if(ok){score++;topicStats[item.topic].right++;}
+  else if(!correctionMode){wrong.push({...item,chosen:item.opts[choice]});}
+  const fb=document.getElementById("feedback");
+  fb.className="feedback show "+(ok?"good":"bad");
+  fb.innerHTML=`<b>${ok?"Correct · 答对了":"Incorrect · 答错了"}</b>${item.exp}<br><strong>Correct answer / 正确答案：</strong> ${item.opts[item.a]}`;
+  document.getElementById("score").textContent=score;
+  document.getElementById("nextBtn").classList.remove("hidden");
+}
+function nextQuestion(){idx++;render()}
+function updateProgress(){
+  const pct=Math.round((idx/order.length)*100);
+  document.getElementById("progressBar").style.width=pct+"%";
+  document.getElementById("progressPct").textContent=pct+"%";
+  document.getElementById("progressText").textContent=correctionMode?"Correction in progress":"Mastery challenge";
+}
+function finish(){
+  document.getElementById("quizArea").classList.add("hidden");
+  document.getElementById("results").classList.add("active");
+  document.getElementById("progressBar").style.width="100%";
+  document.getElementById("progressPct").textContent="100%";
+  document.getElementById("progressText").textContent="Completed";
+  const total=order.length;
+  const pct=Math.round((score/total)*100);
+  document.getElementById("finalScore").textContent=pct+"%";
+  document.getElementById("rawScore").textContent=score+" / "+total;
+  const title=document.getElementById("masteryTitle"), text=document.getElementById("masteryText");
+  if(pct>=80){title.textContent="MASTERED";text.textContent="You can recognise and apply the main types of force confidently.";}
+  else if(pct>=60){title.textContent="ALMOST MASTERED";text.textContent="Your foundation is present, but some force types still need correction.";}
+  else{title.textContent="REVISION REQUIRED";text.textContent="Several force types are still being confused. Review the wrong answers before retrying.";}
+  renderTopicBars();
+  renderWrong();
+  const name=localStorage.getItem("f2sci_81a_name")||"Student";
+  localStorage.setItem("f2sci_81a_last",JSON.stringify({name,pct,score,total,date:new Date().toISOString()}));
+}
+function renderTopicBars(){
+  const box=document.getElementById("topicBars"); box.innerHTML="<h2>Force-Type Mastery</h2>";
+  const all=["Gravitational force","Weight","Normal force","Frictional force","Elastic force","Buoyant force"];
+  all.forEach(t=>{
+    const s=topicStats[t]||{right:0,total:0};
+    const p=s.total?Math.round(s.right/s.total*100):0;
+    box.innerHTML+=`<div class="topic-row"><span>${t}</span><div class="bar"><i style="width:${p}%"></i></div><b>${p}%</b></div>`;
+  });
+}
+function renderWrong(){
+  const box=document.getElementById("wrongList"); box.innerHTML="";
+  if(!wrong.length){box.innerHTML='<div class="wrong-item"><b>No wrong answers.</b><div class="exp">Excellent. All six force types were identified correctly.</div></div>';return;}
+  wrong.forEach((w,i)=>{
+    box.innerHTML+=`<div class="wrong-item"><b>${i+1}. ${w.q}</b><div>Your answer: ${w.chosen}</div><div class="ans">Correct answer: ${w.opts[w.a]}</div><div class="exp"><strong>Explanation / 解释：</strong><br>${w.exp}</div></div>`;
+  });
+}
+function redoWrong(){
+  if(!wrong.length){restartGame();return}
+  order=wrong.map(w=>({...w}));
+  idx=0;score=0;topicStats={};correctionMode=true;
+  document.getElementById("results").classList.remove("active");
+  document.getElementById("quizArea").classList.remove("hidden");
+  render();
+}
+function restartGame(){
+  idx=0;score=0;wrong=[];topicStats={};correctionMode=false;order=[...questions];
+  document.getElementById("results").classList.remove("active");
+  document.getElementById("quizArea").classList.remove("hidden");
+  render();
+}
+window.addEventListener("DOMContentLoaded",()=>{
+  const saved=localStorage.getItem("f2sci_81a_name");
+  if(saved)document.getElementById("studentName").value=saved;
+});
+</script>
+</body>
+</html>

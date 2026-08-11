@@ -1,0 +1,42 @@
+<!--
+Paste this helper into every Chapter 8 student HTML.
+Then call submitChapter8Result(...) inside the existing finish() function.
+-->
+
+<script>
+const CH8_API_URL = "https://YOUR-WORKER-URL.workers.dev";
+
+async function submitChapter8Result(payload){
+  try{
+    const response = await fetch(CH8_API_URL + "/api/submit-result", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(payload)
+    });
+    const data = await response.json();
+    if(!response.ok) throw new Error(data.error || "Upload failed");
+    console.log("Chapter 8 result uploaded:", data);
+    return data;
+  }catch(err){
+    console.error("Could not upload Chapter 8 result:", err);
+    return null;
+  }
+}
+
+/*
+EXAMPLE:
+submitChapter8Result({
+  student_code: localStorage.getItem("student_code") || "S001",
+  student_name: localStorage.getItem("f2sci_81a_name") || "Student",
+  class_name: localStorage.getItem("student_class") || "",
+  module_code: "8.1A",
+  module_title: "Types of Force",
+  score: score,
+  total_questions: order.length,
+  percentage: p,
+  correction_completed: correctionMode,
+  correction_score: correctionMode ? p : null,
+  question_results: attemptLog
+});
+*/
+</script>

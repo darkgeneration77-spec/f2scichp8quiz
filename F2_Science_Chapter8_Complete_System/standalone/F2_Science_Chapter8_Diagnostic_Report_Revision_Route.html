@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Form 2 Science Chapter 8 — Diagnostic Report</title>
+<style>
+:root{--bg:#06101b;--panel:#0b1b2d;--line:#2b4d69;--txt:#f5f8fb;--mut:#a9bfd3;--a:#68d4ff;--g:#6bdd97;--r:#ff7777;--y:#ffd166}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 15% 0,#153d5e 0,transparent 34%),linear-gradient(#050a11,var(--bg));color:var(--txt);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
+.wrap{max-width:1150px;margin:auto;padding:20px}
+.top{position:sticky;top:8px;z-index:5;background:#09192be8;backdrop-filter:blur(10px);border:1px solid #294963;border-radius:18px;padding:14px 16px;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.small{font-size:.84rem;color:var(--mut)}
+.hero{padding:42px 4px 24px;display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:center}
+.kicker{color:var(--a);font-size:.82rem;font-weight:900;letter-spacing:1px}
+.hero h1{font-size:clamp(2.4rem,6vw,4.8rem);line-height:.96;margin:8px 0 14px}
+.hero h1 span{color:var(--y)}
+.hero p{color:var(--mut);line-height:1.65}
+.summary{background:linear-gradient(145deg,#102943,#081827);border:1px solid #2c5274;border-radius:24px;padding:20px}
+.big{font-size:3rem;font-weight:900;color:var(--y)}
+.bar{height:10px;background:#07111d;border:1px solid #294760;border-radius:99px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--g));width:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+.card{border:1px solid #2e4d67;background:#0b1b2d;border-radius:17px;padding:15px}
+.card h3{margin:0 0 7px}
+.score{font-size:1.35rem;font-weight:900}
+.score.good{color:var(--g)}.score.mid{color:var(--y)}.score.bad{color:var(--r)}.score.none{color:var(--mut)}
+.route{margin-top:28px}
+.routeItem{display:grid;grid-template-columns:90px 1fr auto;gap:14px;align-items:center;border:1px solid #2d4b65;background:#0a1829;border-radius:16px;padding:14px;margin:10px 0}
+.priority{font-size:.78rem;font-weight:900;border-radius:99px;padding:6px 8px;text-align:center}
+.high{background:#3b1d26;color:#ffc2c2}.medium{background:#3a2f13;color:#ffe4a1}.done{background:#153b2b;color:#c8f6d7}
+.btn{display:inline-block;text-decoration:none;border-radius:11px;padding:9px 12px;font-weight:850;background:linear-gradient(135deg,var(--a),#a0eaff);color:#04111b;font-size:.84rem}
+.tip{border-left:4px solid var(--a);background:#0b2034;border-radius:12px;padding:13px 15px;margin-top:10px;color:#dceaf6;line-height:1.55}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+button{border:0;border-radius:11px;padding:10px 13px;font-weight:850;cursor:pointer}
+.print{background:#ffd166;color:#251b05}.reset{background:#142a43;color:#fff;border:1px solid #355875}
+.footer{text-align:center;color:#728ba3;padding:30px 0;font-size:.8rem}
+@media(max-width:760px){.hero,.grid{grid-template-columns:1fr}.routeItem{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+@media print{body{background:white;color:#111}.top,.actions,.btn{display:none!important}.card,.summary,.routeItem,.tip{background:white!important;color:#111!important;border-color:#aaa}.small,.hero p{color:#444}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><b>FORM 2 SCIENCE · CHAPTER 8</b><div class="small">Diagnostic Report & Revision Route</div></div>
+    <div class="small" id="student">Student progress report</div>
+  </div>
+
+  <section class="hero">
+    <div>
+      <div class="kicker">POST-GAME DIAGNOSTIC</div>
+      <h1>WHAT DO YOU<br><span>STILL NEED?</span></h1>
+      <p>This report reads the saved scores from all Chapter 8 mastery missions and turns them into a revision route. Weak topics appear first, so revision time goes where it actually matters.</p>
+      <div class="actions">
+        <button class="print" onclick="window.print()">Print Report</button>
+        <button class="reset" onclick="resetData()">Reset Chapter 8 Progress</button>
+      </div>
+    </div>
+    <div class="summary">
+      <div class="small">OVERALL MISSION MASTERY</div>
+      <div class="big" id="overall">0%</div>
+      <div id="overallText" class="small">No completed missions yet.</div>
+      <div class="bar"><i id="overallBar"></i></div>
+      <div class="tip" id="advice">Complete the missions first. The report will then identify weak areas automatically.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Chapter 8 Score Map</h2>
+    <div class="grid" id="scoreGrid"></div>
+  </section>
+
+  <section class="route">
+    <h2>Recommended Revision Route</h2>
+    <div class="small">Lowest scores are placed first.</div>
+    <div id="route"></div>
+  </section>
+
+  <section class="route">
+    <h2>Final Boss Status</h2>
+    <div id="boss"></div>
+  </section>
+
+  <div class="footer">Form 2 Science · Chapter 8 · Diagnostic Report</div>
+</div>
+
+<script>
+const missions=[
+ {code:"8.1A",title:"Types of Force",key:"f2sci_81a_last",file:"F2_Science_Chapter8_8.1A_Types_of_Force_English_CN_Explanations.html",threshold:80,tip:"Revise the six force types and identify them from diagrams and situations."},
+ {code:"8.1B",title:"Magnitude, Direction & Point of Application",key:"f2sci_81b_last",file:"F2_Science_Chapter8_8.1B_Magnitude_Direction_Point_of_Application.html",threshold:80,tip:"Separate magnitude, direction and point of application when reading force arrows."},
+ {code:"8.1C",title:"Measuring Force",key:"f2_81c_last",file:"F2_Science_Chapter8_8.1C_Measuring_Force_Spring_Balance.html",threshold:80,tip:"Revise spring balance, newton (N), scale reading and 100 g ≈ 1 N."},
+ {code:"8.1D",title:"Action & Reaction Forces",key:"f2_81d_last",file:"F2_Science_Chapter8_8.1D_Action_Reaction_Forces.html",threshold:80,tip:"Focus on equal magnitude, opposite direction and different interacting objects."},
+ {code:"8.2A",title:"Effects of Force",key:"f2_82a_last",file:"F2_Science_Chapter8_8.2A_Effects_of_Force.html",threshold:80,tip:"Revise the five effects of force and identify them from real situations."},
+ {code:"8.2B",title:"Buoyant Force & Density",key:"f2_82b_last",file:"F2_Science_Chapter8_8.2B_Buoyant_Force_and_Density.html",threshold:80,tip:"Compare buoyant force with weight and connect floating/sinking with density."},
+ {code:"8.2C",title:"Lever",key:"f2_82c_last",file:"F2_Science_Chapter8_8.2C_Lever.html",threshold:80,tip:"Identify Fulcrum, Load and Effort, then classify by which one is in the middle."},
+ {code:"8.2D",title:"Moment of Force",key:"f2_82d_last",file:"F2_Science_Chapter8_8.2D_Moment_of_Force.html",threshold:80,tip:"Practise M = F × d and remember that d is the perpendicular distance from the pivot."},
+ {code:"8.2E",title:"Pressure",key:"f2_82e_last",file:"F2_Science_Chapter8_8.2E_Pressure.html",threshold:80,tip:"Practise P = F / A and the same-force area-pressure relationship."},
+ {code:"8.2F",title:"Gas Pressure",key:"f2_82f_last",file:"F2_Science_Chapter8_8.2F_Gas_Pressure.html",threshold:80,tip:"Use the chain: random particle motion → collisions with walls → gas pressure."},
+ {code:"8.2G",title:"Atmospheric Pressure",key:"f2_82g_last",file:"F2_Science_Chapter8_8.2G_Atmospheric_Pressure.html",threshold:80,tip:"Revise weight of air and altitude ↑ → atmospheric pressure ↓."},
+ {code:"8.2H",title:"Liquid Pressure",key:"f2_82h_last",file:"F2_Science_Chapter8_8.2H_Liquid_Pressure.html",threshold:80,tip:"Revise depth ↑ → liquid pressure ↑ and applications such as dams and water jets."}
+];
+const boss={title:"Chapter 8 Final Boss",key:"f2_ch8_boss_last",file:"F2_Science_Chapter8_Final_Boss_Full_Mastery_Test.html",threshold:85};
+
+function scoreOf(key){
+  try{
+    const raw=localStorage.getItem(key);
+    if(!raw)return null;
+    const d=JSON.parse(raw);
+    if(typeof d.p==="number")return Math.round(d.p);
+    if(typeof d.pct==="number")return Math.round(d.pct);
+    return null;
+  }catch(e){return null}
+}
+
+function render(){
+  const name=localStorage.getItem("f2sci_81a_name")||localStorage.getItem("f2_81b_name")||localStorage.getItem("f2_81c_name")||localStorage.getItem("f2_82a_name");
+  if(name)document.getElementById("student").textContent="Student: "+name;
+
+  const data=missions.map(m=>({...m,score:scoreOf(m.key)}));
+  const attempted=data.filter(x=>x.score!==null);
+  const mastered=data.filter(x=>x.score!==null&&x.score>=x.threshold).length;
+  const overall=Math.round(mastered/missions.length*100);
+
+  document.getElementById("overall").textContent=overall+"%";
+  document.getElementById("overallBar").style.width=overall+"%";
+  document.getElementById("overallText").textContent=`${mastered} of ${missions.length} missions mastered`;
+
+  let advice="Complete the missions first. The report will then identify weak areas automatically.";
+  if(attempted.length){
+    const weak=[...attempted].sort((a,b)=>a.score-b.score)[0];
+    if(mastered===missions.length) advice="All mission thresholds are met. The student should now focus on the Final Boss and any remaining mixed-question errors.";
+    else advice=`Priority revision: ${weak.code} ${weak.title}. Current score: ${weak.score}%. ${weak.tip}`;
+  }
+  document.getElementById("advice").textContent=advice;
+
+  const grid=document.getElementById("scoreGrid");
+  grid.innerHTML=data.map(x=>{
+    let cls="none",txt="Not attempted";
+    if(x.score!==null){cls=x.score>=80?"good":x.score>=60?"mid":"bad";txt=x.score+"%"}
+    return `<div class="card"><div class="small">${x.code}</div><h3>${x.title}</h3><div class="score ${cls}">${txt}</div><div class="bar"><i style="width:${x.score===null?0:x.score}%"></i></div></div>`;
+  }).join("");
+
+  const route=document.getElementById("route");
+  const sorted=[...data].sort((a,b)=>{
+    if(a.score===null&&b.score===null)return 0;
+    if(a.score===null)return -1;
+    if(b.score===null)return 1;
+    return a.score-b.score;
+  });
+  route.innerHTML=sorted.map(x=>{
+    let pClass="done",pText="MASTERED";
+    if(x.score===null){pClass="high";pText="DO FIRST"}
+    else if(x.score<60){pClass="high";pText="HIGH"}
+    else if(x.score<80){pClass="medium";pText="MEDIUM"}
+    return `<div class="routeItem">
+      <div class="priority ${pClass}">${pText}</div>
+      <div><b>${x.code} · ${x.title}</b><div class="small">${x.score===null?"No score yet":`Current score: ${x.score}%`}</div><div style="margin-top:5px">${x.tip}</div></div>
+      <a class="btn" href="${x.file}">${x.score===null?"Start":"Revise"}</a>
+    </div>`
+  }).join("");
+
+  const bs=scoreOf(boss.key);
+  let bstatus=bs===null?"Not attempted":bs+"%";
+  let bmsg=bs===null?"Complete the Final Boss after the individual missions.":bs>=boss.threshold?"Final Boss mastery achieved.":"Final Boss is below the 85% mastery target. Correct errors and retry.";
+  document.getElementById("boss").innerHTML=`<div class="routeItem">
+    <div class="priority ${bs!==null&&bs>=85?"done":"high"}">${bs!==null&&bs>=85?"MASTERED":"FINAL"}</div>
+    <div><b>${boss.title}</b><div class="small">${bstatus}</div><div style="margin-top:5px">${bmsg}</div></div>
+    <a class="btn" href="${boss.file}">${bs===null?"Start Boss":"Open Boss"}</a>
+  </div>`;
+}
+
+function resetData(){
+  if(!confirm("Reset all saved Chapter 8 scores on this browser?"))return;
+  [...missions.map(x=>x.key),boss.key].forEach(k=>localStorage.removeItem(k));
+  render();
+}
+render();
+</script>
+</body>
+</html>

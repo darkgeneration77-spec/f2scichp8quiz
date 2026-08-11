@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Form 2 Science Chapter 8 — Mastery Hub</title>
+<style>
+:root{
+  --bg:#06101b;--panel:#0b1b2d;--panel2:#102840;--line:#2b4d69;
+  --txt:#f4f8fc;--mut:#a8bed2;--a:#68d4ff;--g:#6bdd97;--r:#ff7777;--y:#ffd166
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--txt);
+  background:radial-gradient(circle at 15% 0,#153d5e 0,transparent 34%),linear-gradient(#050a11,var(--bg));
+  min-height:100vh
+}
+.wrap{max-width:1180px;margin:auto;padding:20px}
+.top{
+  position:sticky;top:8px;z-index:10;background:#09192be8;backdrop-filter:blur(12px);
+  border:1px solid #294963;border-radius:18px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px
+}
+.small{font-size:.84rem;color:var(--mut)}
+.hero{padding:46px 4px 25px;display:grid;grid-template-columns:1.08fr .92fr;gap:24px;align-items:center}
+.kicker{color:var(--a);font-size:.82rem;font-weight:900;letter-spacing:1px}
+.hero h1{font-size:clamp(2.5rem,6vw,5rem);line-height:.96;margin:8px 0 14px}
+.hero h1 span{color:var(--y)}
+.hero p{color:var(--mut);line-height:1.65}
+.cardHero{
+  background:linear-gradient(145deg,#102943,#081827);border:1px solid #2c5274;border-radius:26px;
+  padding:20px;box-shadow:0 25px 80px #0007
+}
+.scorebox{text-align:center;padding:25px}
+.scorebox strong{font-size:3rem;display:block;color:var(--y)}
+.scorebox span{color:var(--mut)}
+.overallbar{height:12px;background:#07111d;border:1px solid #294760;border-radius:99px;overflow:hidden;margin-top:14px}
+.overallbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--g));transition:.5s}
+.section{margin-top:28px}
+.section h2{margin:0 0 6px}
+.section p{color:var(--mut);margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.unit{
+  border:1px solid #2d4f6b;background:linear-gradient(145deg,#0c1f34,#091725);
+  border-radius:18px;padding:16px;position:relative;overflow:hidden;min-height:195px;
+  display:flex;flex-direction:column
+}
+.unit .num{font-size:.8rem;color:var(--a);font-weight:900;letter-spacing:.8px}
+.unit h3{margin:7px 0 7px;font-size:1.08rem}
+.unit p{font-size:.88rem;line-height:1.5;color:var(--mut);flex:1}
+.status{
+  display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:99px;border:1px solid #35556f;
+  width:max-content;font-size:.78rem;margin-bottom:10px
+}
+.status.master{border-color:#37895a;background:#143626;color:#bff4d2}
+.status.progress{border-color:#8a6d27;background:#362c13;color:#ffe6a1}
+.status.none{color:#a9bfd3}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.btn{
+  text-decoration:none;border-radius:11px;padding:10px 12px;font-weight:850;
+  background:linear-gradient(135deg,var(--a),#a0eaff);color:#04111b;font-size:.86rem
+}
+.btn.boss{background:linear-gradient(135deg,#ffd166,#ffb347)}
+.bossCard{border-color:#80672d;background:linear-gradient(145deg,#30240d,#111b27)}
+.bossCard h3{color:#ffe6a0}
+.footer{text-align:center;color:#728ba3;padding:30px 0;font-size:.8rem}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.chip{border:1px solid #315777;background:#0c2137;border-radius:99px;padding:7px 11px;font-size:.82rem}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr}}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.wrap{padding:14px}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><b>FORM 2 SCIENCE · CHAPTER 8</b><div class="small">Force and Motion · Mastery Hub</div></div>
+    <div class="small" id="student">Student progress</div>
+  </div>
+
+  <section class="hero">
+    <div>
+      <div class="kicker">8.1 + 8.2 · COMPLETE REVISION ROUTE</div>
+      <h1>CHAPTER 8<br><span>MASTERY HUB</span></h1>
+      <p>Complete each mission, correct your mistakes, and then enter the Final Boss. Progress is stored in this browser, so the mastery map updates automatically.</p>
+      <div class="legend">
+        <span class="chip">8.1 Force</span><span class="chip">8.2 Effects of Force</span>
+        <span class="chip">12 Missions</span><span class="chip">1 Final Boss</span>
+      </div>
+    </div>
+    <div class="cardHero scorebox">
+      <div class="small">MISSIONS MASTERED</div>
+      <strong id="masteredCount">0 / 12</strong>
+      <span id="overallText">No completed missions yet.</span>
+      <div class="overallbar"><i id="overallBar"></i></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>8.1 Force</h2>
+    <p>Master the four core skills before moving into 8.2.</p>
+    <div class="grid" id="grid81"></div>
+  </section>
+
+  <section class="section">
+    <h2>8.2 Effects of Force</h2>
+    <p>Complete all eight applications and pressure-related missions.</p>
+    <div class="grid" id="grid82"></div>
+  </section>
+
+  <section class="section">
+    <h2>Final Boss</h2>
+    <p>Mixed questions with no topic hints. This is the real Chapter 8 mastery check.</p>
+    <div class="grid" id="gridBoss"></div>
+  </section>
+
+  <div class="footer">Form 2 Science · Chapter 8 · Force and Motion</div>
+</div>
+
+<script>
+const missions81=[
+ {code:"8.1A",title:"Types of Force",desc:"Gravitational force, weight, normal force, frictional force, elastic force and buoyant force.",file:"F2_Science_Chapter8_8.1A_Types_of_Force_English_CN_Explanations.html",key:"f2sci_81a_last",threshold:80},
+ {code:"8.1B",title:"Force Characteristics",desc:"Magnitude, direction and point of application.",file:"F2_Science_Chapter8_8.1B_Magnitude_Direction_Point_of_Application.html",key:"f2sci_81b_last",threshold:80},
+ {code:"8.1C",title:"Measuring Force",desc:"Spring balance, newton (N), scale reading and simple weight relation.",file:"F2_Science_Chapter8_8.1C_Measuring_Force_Spring_Balance.html",key:"f2_81c_last",threshold:80},
+ {code:"8.1D",title:"Action & Reaction Forces",desc:"Equal magnitude, opposite direction and different interacting objects.",file:"F2_Science_Chapter8_8.1D_Action_Reaction_Forces.html",key:"f2_81d_last",threshold:80}
+];
+
+const missions82=[
+ {code:"8.2A",title:"Effects of Force",desc:"Move, stop, change speed, change direction and change shape or size.",file:"F2_Science_Chapter8_8.2A_Effects_of_Force.html",key:"f2_82a_last",threshold:80},
+ {code:"8.2B",title:"Buoyant Force & Density",desc:"Float, sink, buoyant force versus weight and density relationship.",file:"F2_Science_Chapter8_8.2B_Buoyant_Force_and_Density.html",key:"f2_82b_last",threshold:80},
+ {code:"8.2C",title:"Lever",desc:"Fulcrum, load, effort and the three classes of lever.",file:"F2_Science_Chapter8_8.2C_Lever.html",key:"f2_82c_last",threshold:80},
+ {code:"8.2D",title:"Moment of Force",desc:"M = F × d, pivot, perpendicular distance and applications.",file:"F2_Science_Chapter8_8.2D_Moment_of_Force.html",key:"f2_82d_last",threshold:80},
+ {code:"8.2E",title:"Pressure",desc:"P = F / A, force-area relationship, calculations and applications.",file:"F2_Science_Chapter8_8.2E_Pressure.html",key:"f2_82e_last",threshold:80},
+ {code:"8.2F",title:"Gas Pressure",desc:"Random particle motion, collisions and pressure in a gas.",file:"F2_Science_Chapter8_8.2F_Gas_Pressure.html",key:"f2_82f_last",threshold:80},
+ {code:"8.2G",title:"Atmospheric Pressure",desc:"Weight of air, altitude and atmospheric-pressure applications.",file:"F2_Science_Chapter8_8.2G_Atmospheric_Pressure.html",key:"f2_82g_last",threshold:80},
+ {code:"8.2H",title:"Liquid Pressure",desc:"Depth, water jets, dams and liquid-pressure applications.",file:"F2_Science_Chapter8_8.2H_Liquid_Pressure.html",key:"f2_82h_last",threshold:80}
+];
+
+const boss=[
+ {code:"FINAL",title:"Chapter 8 Final Boss",desc:"40 mixed questions covering all of 8.1 and 8.2 with a full mastery map.",file:"F2_Science_Chapter8_Final_Boss_Full_Mastery_Test.html",key:"f2_ch8_boss_last",threshold:85}
+];
+
+function readScore(m){
+  try{
+    const raw=localStorage.getItem(m.key);
+    if(!raw)return null;
+    const d=JSON.parse(raw);
+    const pct = typeof d.p==="number" ? d.p : (typeof d.pct==="number" ? d.pct : null);
+    if(pct===null)return null;
+    return Math.round(pct);
+  }catch(e){return null}
+}
+
+function card(m,isBoss=false){
+  const pct=readScore(m);
+  let cls="none",txt="Not attempted";
+  if(pct!==null){
+    if(pct>=m.threshold){cls="master";txt=`Mastered · ${pct}%`}
+    else{cls="progress";txt=`Needs revision · ${pct}%`}
+  }
+  return `<div class="unit ${isBoss?"bossCard":""}">
+    <div class="num">${m.code}</div>
+    <h3>${m.title}</h3>
+    <div class="status ${cls}">${txt}</div>
+    <p>${m.desc}</p>
+    <div class="row">
+      <span class="small">${isBoss?"Mastery threshold: 85%":"Mastery threshold: 80%"}</span>
+      <a class="btn ${isBoss?"boss":""}" href="${m.file}">${pct===null?"Start":"Open"}</a>
+    </div>
+  </div>`
+}
+
+function render(){
+  document.getElementById("grid81").innerHTML=missions81.map(m=>card(m)).join("");
+  document.getElementById("grid82").innerHTML=missions82.map(m=>card(m)).join("");
+  document.getElementById("gridBoss").innerHTML=boss.map(m=>card(m,true)).join("");
+
+  const all=[...missions81,...missions82];
+  const mastered=all.filter(m=>{
+    const p=readScore(m); return p!==null && p>=m.threshold;
+  }).length;
+  const pct=Math.round(mastered/all.length*100);
+  document.getElementById("masteredCount").textContent=`${mastered} / ${all.length}`;
+  document.getElementById("overallBar").style.width=pct+"%";
+  document.getElementById("overallText").textContent=
+    mastered===all.length ? "All missions mastered. Final Boss is ready." :
+    mastered===0 ? "No missions mastered yet." :
+    `${pct}% of Chapter 8 missions mastered.`;
+
+  const n=localStorage.getItem("f2sci_81a_name")||localStorage.getItem("f2_81b_name")||localStorage.getItem("f2_81c_name")||localStorage.getItem("f2_82a_name");
+  if(n)document.getElementById("student").textContent=`Student: ${n}`;
+}
+window.addEventListener("storage",render);
+render();
+</script>
+</body>
+</html>
