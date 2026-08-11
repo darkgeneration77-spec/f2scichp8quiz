@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 8 Student Setup</title>
+<style>
+body{margin:0;background:#07111d;color:#f5f8fb;font-family:Inter,Segoe UI,Arial,sans-serif}
+.wrap{max-width:720px;margin:40px auto;padding:20px}.card{border:1px solid #2d4d67;background:#0b1b2d;border-radius:20px;padding:22px}
+h1{margin-top:0}.small{color:#a9bfd3;line-height:1.6}input{width:100%;padding:12px;margin:7px 0 14px;border-radius:11px;border:1px solid #35556f;background:#091827;color:#fff}
+button{border:0;border-radius:11px;padding:11px 15px;background:#68d4ff;color:#04111b;font-weight:850;cursor:pointer}.ok{margin-top:15px;padding:12px;border-radius:12px;background:#153b2b;color:#c8f6d7;display:none}
+</style>
+</head>
+<body><div class="wrap"><div class="card">
+<h1>Chapter 8 Student Setup</h1>
+<p class="small">Set this once on the student's device. The games will reuse the Student ID, name and class automatically. The API URL is your deployed Cloudflare Worker.</p>
+<label>Cloudflare Worker API URL</label><input id="api" placeholder="https://your-worker.workers.dev">
+<label>Student ID</label><input id="code" placeholder="S001">
+<label>Student Name</label><input id="name" placeholder="Student name">
+<label>Class</label><input id="className" placeholder="2A">
+<button onclick="save()">Save Setup</button>
+<div id="ok" class="ok">Saved. This device is ready to upload Chapter 8 results.</div>
+</div></div>
+<script>
+document.getElementById("api").value=localStorage.getItem("ch8_api_url")||"";
+document.getElementById("code").value=localStorage.getItem("ch8_student_code")||"";
+document.getElementById("name").value=localStorage.getItem("ch8_student_name")||"";
+document.getElementById("className").value=localStorage.getItem("ch8_class_name")||"";
+function save(){
+ const api=document.getElementById("api").value.trim().replace(/\/$/,"");
+ const code=document.getElementById("code").value.trim();
+ const name=document.getElementById("name").value.trim();
+ const cls=document.getElementById("className").value.trim();
+ if(!api||!code||!name){alert("API URL, Student ID and Student Name are required.");return}
+ localStorage.setItem("ch8_api_url",api);localStorage.setItem("ch8_student_code",code);
+ localStorage.setItem("ch8_student_name",name);localStorage.setItem("ch8_class_name",cls);
+ document.getElementById("ok").style.display="block";
+}
+</script></body></html>
