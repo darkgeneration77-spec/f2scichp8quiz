@@ -7,7 +7,7 @@
 body{margin:0;background:#07111d;color:#f5f8fb;font-family:Inter,Segoe UI,Arial,sans-serif}
 .wrap{max-width:720px;margin:40px auto;padding:20px}.card{border:1px solid #2d4d67;background:#0b1b2d;border-radius:20px;padding:22px}
 h1{margin-top:0}.small{color:#a9bfd3;line-height:1.6}input{width:100%;padding:12px;margin:7px 0 14px;border-radius:11px;border:1px solid #35556f;background:#091827;color:#fff}
-button{border:0;border-radius:11px;padding:11px 15px;background:#68d4ff;color:#04111b;font-weight:850;cursor:pointer}.ok{margin-top:15px;padding:12px;border-radius:12px;background:#153b2b;color:#c8f6d7;display:none}
+button,.home{border:0;border-radius:11px;padding:11px 15px;font-weight:850;cursor:pointer}.ok{margin-top:15px;padding:12px;border-radius:12px;background:#153b2b;color:#c8f6d7;display:none}.actions{display:flex;gap:10px;flex-wrap:wrap}.actions button{background:#68d4ff;color:#04111b}.home{display:inline-block;text-decoration:none;background:#142a43;color:#fff;border:1px solid #355875}
 </style>
 </head>
 <body><div class="wrap"><div class="card">
@@ -17,7 +17,7 @@ button{border:0;border-radius:11px;padding:11px 15px;background:#68d4ff;color:#0
 <label>Student ID</label><input id="code" placeholder="S001">
 <label>Student Name</label><input id="name" placeholder="Student name">
 <label>Class</label><input id="className" placeholder="2A">
-<button onclick="save()">Save Setup</button>
+<div class="actions"><button onclick="save()">Save Setup</button><a class="home" href="index.html">Home · 返回主页</a></div>
 <div id="ok" class="ok">Saved. This device is ready to upload Chapter 8 results.</div>
 </div></div>
 <script>
